@@ -104,8 +104,8 @@ export default function Home() {
             >
               <div className="relative z-10 rounded-2xl overflow-hidden border-8 border-card shadow-2xl shadow-accent/10">
                 <Image
-                  src="/hero-image.png"
-                  alt="Fidsmart Professional Desk"
+                  src="/hero-image-branded.png"
+                  alt="Fidsmart Branded Office"
                   width={1024}
                   height={1024}
                   className="w-full h-auto object-cover"

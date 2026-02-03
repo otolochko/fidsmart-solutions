@@ -20,7 +20,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     "hero.title": "Fidsmart Solutions",
-    "hero.subtitle": "Votre partenaire de confiance pour la gestion d'entreprise en Suisse",
+    "hero.subtitle": "Précision - Progrès - Partenariat",
 
     // Services
     "services.title": "Nos services",
@@ -60,7 +60,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     "hero.title": "Fidsmart Solutions",
-    "hero.subtitle": "Your trusted partner for business management in Switzerland",
+    "hero.subtitle": "Precision - Progress - Partnership",
 
     // Services
     "services.title": "Our Services",
