@@ -3,99 +3,129 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/language-context";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, MapPin, Clock, Users, Shield } from "lucide-react";
+
+function FadeIn({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.65, delay, ease: [0.25, 0.1, 0.25, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function AboutPage() {
   const { t } = useLanguage();
 
   const details = [
-    {
-      key: "about.location",
-      icon: MapPin,
-      delay: 0,
-    },
-    {
-      key: "about.hours",
-      icon: Clock,
-      delay: 0.1,
-    },
-    {
-      key: "about.meetings",
-      icon: Users,
-      delay: 0.2,
-    },
+    { key: "about.location", icon: MapPin, delay: 0 },
+    { key: "about.hours", icon: Clock, delay: 0.1 },
+    { key: "about.meetings", icon: Users, delay: 0.2 },
   ];
 
   return (
     <div className="relative">
-      {/* Hero Section */}
-      <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
+      {/* ── HERO ── */}
+      <section className="relative h-[52vh] flex items-center justify-center overflow-hidden">
         <Image
           src="/about-hero.png"
-          alt="About Fidsmart Solutions"
+          alt="À propos de Fidsmart Solutions"
           fill
-          className="object-cover brightness-[0.4]"
+          className="object-cover"
           priority
         />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <motion.h1
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(10,20,35,0.82) 0%, rgba(10,20,35,0.70) 60%, rgba(10,20,35,0.90) 100%)",
+          }}
+        />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/25 to-transparent" />
+
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold mb-6 flex flex-col items-center gap-2 leading-tight"
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <span>{t("about.hero.title")}</span>
-            <span className="text-accent underline decoration-2 underline-offset-8">Fidsmart Solutions</span>
-          </motion.h1>
-        </div>
-      </section>
-
-      {/* Intro Section */}
-      <section className="py-20 lg:py-32 bg-background relative">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-accent/10 rounded-full mb-8">
-              <Shield className="w-6 h-6 text-accent" />
+            <div
+              className="inline-flex items-center justify-center w-14 h-14 rounded-sm border border-[#D4AF37]/40 mb-6"
+              style={{ backgroundColor: "rgba(212,175,55,0.1)" }}
+            >
+              <Shield className="w-6 h-6 text-[#D4AF37]" strokeWidth={1.5} />
             </div>
-            <p className="text-xl sm:text-2xl font-medium text-foreground leading-relaxed mb-8">
-              {t("about.hero.subtitle")}
-            </p>
-            <p className="text-lg text-muted leading-relaxed">
-              {t("about.description")}
-            </p>
+
+            <h1 className="font-display font-bold text-5xl sm:text-6xl lg:text-7xl text-white leading-tight mb-5">
+              {t("about.hero.title")}
+              <br />
+              <span style={{ color: "#D4AF37" }}>Fidsmart Solutions</span>
+            </h1>
           </motion.div>
         </div>
       </section>
 
-      {/* Info Grid Section */}
-      <section className="py-20 bg-card/50 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+      {/* ── INTRO ── */}
+      <section className="py-16 lg:py-24 bg-background">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <p className="text-lg sm:text-xl font-medium text-foreground/80 leading-relaxed mb-5">
+              {t("about.hero.subtitle")}
+            </p>
+            <p className="text-base text-foreground/70 leading-relaxed">
+              {t("about.description")}
+            </p>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ── INFO GRID ── */}
+      <section className="pb-16 lg:pb-24 bg-background">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-3">
             {details.map((item) => {
               const Icon = item.icon;
               return (
                 <motion.div
                   key={item.key}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: item.delay }}
-                  className="bg-card p-8 rounded-3xl border border-border text-center hover:border-accent/40 transition-all group"
+                  transition={{ duration: 0.45, delay: item.delay }}
+                  className="flex items-start gap-4 p-5 bg-card border border-border rounded-sm hover:border-[#D4AF37]/30 transition-colors duration-300"
                 >
-                  <div className="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-accent/20 transition-colors">
-                    <Icon className="w-7 h-7 text-accent" />
+                  <div
+                    className="w-6 h-6 shrink-0 rounded-sm flex items-center justify-center mt-0.5"
+                    style={{
+                      backgroundColor: "rgba(212,175,55,0.12)",
+                      border: "1px solid rgba(212,175,55,0.35)",
+                    }}
+                  >
+                    <Icon className="w-3.5 h-3.5 text-[#D4AF37]" strokeWidth={2} />
                   </div>
-                  <h3 className="text-xl font-display font-bold mb-3">
-                    {t(`${item.key}.title`)}
-                  </h3>
-                  <p className="text-muted leading-relaxed">
-                    {t(`${item.key}.detail`)}
-                  </p>
+                  <div>
+                    <span className="text-foreground font-medium text-sm">
+                      {t(`${item.key}.title`)}
+                    </span>
+                    <p className="text-muted text-xs mt-1 leading-relaxed">
+                      {t(`${item.key}.detail`)}
+                    </p>
+                  </div>
                 </motion.div>
               );
             })}
@@ -103,30 +133,37 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 lg:py-32 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-gradient-to-br from-accent/5 to-accent/10 border border-accent/20 rounded-3xl p-10 lg:p-20 flex flex-col items-center text-center"
-          >
-            <h2 className="text-3xl sm:text-4xl font-display font-bold mb-6">
+      {/* ── CTA ── */}
+      <section className="py-16 lg:py-24 bg-[#1A2B3C]">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <FadeIn>
+            <div className="flex items-center justify-center gap-3 mb-5">
+              <span className="block w-8 h-px bg-[#D4AF37]/50" />
+              <span className="text-[#D4AF37] text-[10px] font-semibold tracking-[0.25em] uppercase">
+                Prendre contact
+              </span>
+              <span className="block w-8 h-px bg-[#D4AF37]/50" />
+            </div>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-white mb-4">
               Prêt à propulser votre entreprise?
             </h2>
-            <p className="text-lg text-muted max-w-2xl mb-10">
+            <p className="text-white/50 text-sm leading-relaxed mb-8 max-w-md mx-auto">
               Découvrez comment notre expertise peut faire la différence pour votre gestion fiduciaire et administrative.
             </p>
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-accent text-accent-foreground font-bold rounded-full hover:brightness-110 transition-all group scale-110 shadow-xl shadow-accent/20"
-            >
-              {t("nav.contact")}
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </motion.div>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Link
+                href="/#contact"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold tracking-wide rounded-sm transition-all duration-300 group"
+                style={{ backgroundColor: "#D4AF37", color: "#0f1a24" }}
+              >
+                {t("nav.contact")}
+                <ArrowRight
+                  className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                  strokeWidth={2}
+                />
+              </Link>
+            </motion.div>
+          </FadeIn>
         </div>
       </section>
     </div>

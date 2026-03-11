@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useLanguage } from "@/lib/language-context";
 import Image from "next/image";
 import { useRef, useState } from "react";
+import Link from "next/link";
 import {
   FileText,
   Calculator,
@@ -23,13 +24,14 @@ import {
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
+// href: null = no dedicated page, string = links to page
 const mainServices = [
-  { key: "services.fiscalite", icon: FileText, delay: 0 },
-  { key: "services.comptabilite", icon: Calculator, delay: 0.07 },
-  { key: "services.creation", icon: Building2, delay: 0.14 },
-  { key: "services.domiciliation", icon: MapPin, delay: 0.21 },
-  { key: "services.gestion", icon: Settings, delay: 0.28 },
-  { key: "services.rh", icon: Users, delay: 0.35 },
+  { key: "services.fiscalite", icon: FileText, delay: 0, href: "/fiscalite" },
+  { key: "services.comptabilite", icon: Calculator, delay: 0.07, href: "/comptabilite" },
+  { key: "services.creation", icon: Building2, delay: 0.14, href: "/creation-d-entreprise" },
+  { key: "services.domiciliation", icon: MapPin, delay: 0.21, href: null },
+  { key: "services.gestion", icon: Settings, delay: 0.28, href: null },
+  { key: "services.rh", icon: Users, delay: 0.35, href: null },
 ];
 
 const complementaryServices = [
@@ -290,24 +292,11 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#e5e7eb] dark:bg-[#D4AF37]/10">
             {mainServices.map((service) => {
               const Icon = service.icon;
-              return (
-                <motion.div
-                  key={service.key}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.55, delay: service.delay }}
-                  whileHover={{ y: -4 }}
-                  className="group bg-white dark:bg-[#0f1520] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl hover:shadow-[#1A2B3C]/5 dark:hover:shadow-black/20 relative overflow-hidden"
-                >
-                  {/* Gold accent bar on hover */}
+              const cardContent = (
+                <>
                   <div className="absolute top-0 left-0 w-full h-0.5 bg-[#D4AF37] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-
                   <div className="w-12 h-12 rounded-sm border border-[#D4AF37]/30 group-hover:border-[#D4AF37]/70 flex items-center justify-center mb-6 transition-colors duration-300">
-                    <Icon
-                      className="w-5 h-5 text-[#D4AF37]"
-                      strokeWidth={1.5}
-                    />
+                    <Icon className="w-5 h-5 text-[#D4AF37]" strokeWidth={1.5} />
                   </div>
                   <h3 className="font-display font-bold text-xl text-[#1A2B3C] dark:text-white mb-3">
                     {t(service.key)}
@@ -315,17 +304,57 @@ export default function Home() {
                   <p className="text-sm text-[#1A2B3C]/55 dark:text-white/45 leading-relaxed">
                     {t(`${service.key}.desc`)}
                   </p>
-                  <div className="mt-6 flex items-center gap-2 text-[#D4AF37] text-xs font-semibold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span>En savoir plus</span>
-                    <ArrowRight className="w-3.5 h-3.5" strokeWidth={2} />
-                  </div>
+                  {service.href && (
+                    <div className="mt-6 flex items-center gap-2 text-[#D4AF37] text-xs font-semibold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span>En savoir plus</span>
+                      <ArrowRight className="w-3.5 h-3.5" strokeWidth={2} />
+                    </div>
+                  )}
+                </>
+              );
+
+              const className =
+                "group bg-white dark:bg-[#0f1520] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl hover:shadow-[#1A2B3C]/5 dark:hover:shadow-black/20 relative overflow-hidden";
+
+              return service.href ? (
+                <motion.div
+                  key={service.key}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.55, delay: service.delay }}
+                  whileHover={{ y: -4 }}
+                >
+                  <Link href={service.href} className={`block ${className}`}>
+                    {cardContent}
+                  </Link>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key={service.key}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.55, delay: service.delay }}
+                  whileHover={{ y: -4 }}
+                  className={className}
+                >
+                  {cardContent}
                 </motion.div>
               );
             })}
           </div>
 
+          {/* Complementary services header */}
+          <FadeIn className="mt-16 mb-8 text-center">
+            <SectionLabel text={t("complementary.title")} />
+            <p className="text-[#1A2B3C]/55 dark:text-white/45 text-sm max-w-lg mx-auto">
+              {t("complementary.subtitle")}
+            </p>
+          </FadeIn>
+
           {/* Complementary services */}
-          <div className="mt-px grid grid-cols-1 sm:grid-cols-2 gap-px bg-[#e5e7eb] dark:bg-[#D4AF37]/10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-[#e5e7eb] dark:bg-[#D4AF37]/10">
             {complementaryServices.map((service) => {
               const Icon = service.icon;
               return (
@@ -336,10 +365,12 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.55, delay: service.delay }}
                   whileHover={{ y: -4 }}
-                  className="group bg-white dark:bg-[#0f1520] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl relative overflow-hidden"
                 >
-                  <div className="absolute top-0 left-0 w-full h-0.5 bg-[#D4AF37] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                  <div className="flex items-start gap-6">
+                  <Link
+                    href="/offres-etendues"
+                    className="group bg-white dark:bg-[#0f1520] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl relative overflow-hidden flex items-start gap-6 block"
+                  >
+                    <div className="absolute top-0 left-0 w-full h-0.5 bg-[#D4AF37] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                     <div className="w-12 h-12 shrink-0 rounded-sm border border-[#D4AF37]/30 group-hover:border-[#D4AF37]/70 flex items-center justify-center transition-colors duration-300">
                       <Icon className="w-5 h-5 text-[#D4AF37]" strokeWidth={1.5} />
                     </div>
@@ -350,8 +381,12 @@ export default function Home() {
                       <p className="text-sm text-[#1A2B3C]/55 dark:text-white/45 leading-relaxed">
                         {t(`${service.key}.desc`)}
                       </p>
+                      <div className="mt-4 flex items-center gap-2 text-[#D4AF37] text-xs font-semibold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span>En savoir plus</span>
+                        <ArrowRight className="w-3.5 h-3.5" strokeWidth={2} />
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </motion.div>
               );
             })}
@@ -435,7 +470,7 @@ export default function Home() {
                     whileTap={{ scale: 0.98 }}
                     className="inline-flex items-center gap-2 text-[#D4AF37] text-sm font-semibold tracking-wide group"
                   >
-                    En savoir plus sur Fidsmart
+                    {t("expertise.learn.more")}
                     <ArrowRight
                       className="w-4 h-4 group-hover:translate-x-1 transition-transform"
                       strokeWidth={2}

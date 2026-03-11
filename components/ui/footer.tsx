@@ -92,16 +92,10 @@ export function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-12 pt-8 border-t border-border flex items-center justify-center">
           <p className="text-sm text-muted">
             © {currentYear} Fidsmart Solutions. {t("footer.rights")}.
           </p>
-          <Link
-            href="/politique-de-confidentialite"
-            className="text-sm text-muted hover:text-accent transition-colors duration-300"
-          >
-            {t("footer.privacy")}
-          </Link>
         </div>
       </div>
     </footer>

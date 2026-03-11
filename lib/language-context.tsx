@@ -18,6 +18,12 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.services": "Services",
     "nav.contact": "Contact",
     "nav.clientportal": "Portail Client",
+    "nav.service.fiscalite": "Fiscalité",
+    "nav.service.comptabilite": "Comptabilité",
+    "nav.service.creation": "Création d'entreprise",
+    "nav.service.administratif": "Administratif",
+    "nav.service.frontaliers": "Frontaliers",
+    "nav.service.offres": "Offres étendues",
 
     // Hero
     "hero.title": "Fidsmart Solutions",
@@ -55,9 +61,16 @@ const translations: Record<Language, Record<string, string>> = {
     "services.gestion.desc": "Gestion administrative et facturation pour le compte de votre entreprise.",
     "services.rh": "Ressources Humaines",
     "services.rh.desc": "Gestion des ressources humaines, suivis des employés, recrutement.",
+    "services.administratif": "Administratif",
+    "services.administratif.desc": "Gestion administrative et déclarations sociales pour le compte de votre entreprise.",
+    "services.frontaliers": "Frontaliers",
+    "services.frontaliers.desc": "Facilitez votre déclaration d'impôt en tant que travailleur frontalier en Suisse.",
+    "services.offres": "Offres étendues",
+    "services.offres.desc": "Traduction de vos documents et digital marketing pour votre développement.",
 
     // Complementary Services
     "complementary.title": "Nos services complémentaires",
+    "complementary.subtitle": "En compléments des services mentionnés ci-dessus, nous vous proposons des compléments :",
     "complementary.traduction": "Traduction",
     "complementary.traduction.desc": "Traduction de vos documents dans quatre langues : français, anglais, espagnol et chinois.",
     "complementary.marketing": "Digital Marketing",
@@ -65,14 +78,15 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Expertise / Swiss Advantage
     "expertise.section.label": "L'AVANTAGE SUISSE",
+    "expertise.learn.more": "En savoir plus sur Fidsmart",
     "expertise.title": "Pourquoi choisir Fidsmart?",
     "expertise.subtitle": "Une expertise locale, une vision internationale. Nous combinons la rigueur suisse avec l'agilité d'une équipe entièrement dédiée à votre succès.",
-    "expertise.adv1": "Expertise confirmée en droit suisse des affaires",
-    "expertise.adv2": "Services bilingues français et anglais",
-    "expertise.adv3": "Accès sécurisé au portail client 24h/7j",
+    "expertise.adv1": "Cabinet fiduciaire spécialisé en gestion d'entreprise suisse",
+    "expertise.adv2": "Services disponibles en français et en anglais",
+    "expertise.adv3": "Rendez-vous en physique ou en visioconférence",
     "expertise.adv4": "Disponibilité du lundi au vendredi, 9h–17h",
-    "expertise.adv5": "Discrétion et confidentialité absolues",
-    "expertise.adv6": "Honoraires transparents, sans frais cachés",
+    "expertise.adv5": "Spécialistes des travailleurs frontaliers et du statut quasi-résident",
+    "expertise.adv6": "Traduction de documents en 4 langues : français, anglais, espagnol, chinois",
 
     // Contact
     "contact.section.label": "NOUS CONTACTER",
@@ -112,6 +126,12 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.services": "Services",
     "nav.contact": "Contact",
     "nav.clientportal": "Client Portal",
+    "nav.service.fiscalite": "Taxation",
+    "nav.service.comptabilite": "Accounting",
+    "nav.service.creation": "Business Formation",
+    "nav.service.administratif": "Administrative",
+    "nav.service.frontaliers": "Cross-border Workers",
+    "nav.service.offres": "Extended Services",
 
     // Hero
     "hero.title": "Fidsmart Solutions",
@@ -149,6 +169,12 @@ const translations: Record<Language, Record<string, string>> = {
     "services.gestion.desc": "Administrative management and invoicing on behalf of your company.",
     "services.rh": "Human Resources",
     "services.rh.desc": "HR management, employee tracking, and recruitment.",
+    "services.administratif": "Administrative",
+    "services.administratif.desc": "Administrative management and social declarations on behalf of your company.",
+    "services.frontaliers": "Cross-border Workers",
+    "services.frontaliers.desc": "Simplify your tax declaration as a cross-border worker in Switzerland.",
+    "services.offres": "Extended Services",
+    "services.offres.desc": "Document translation and digital marketing to support your growth.",
 
     // Complementary Services
     "complementary.title": "Additional Services",
@@ -159,14 +185,15 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Expertise / Swiss Advantage
     "expertise.section.label": "THE SWISS ADVANTAGE",
+    "expertise.learn.more": "Learn more about Fidsmart",
     "expertise.title": "Why choose Fidsmart?",
     "expertise.subtitle": "Local expertise, international vision. We combine Swiss precision with the agility of a team entirely dedicated to your success.",
-    "expertise.adv1": "Proven expertise in Swiss business law",
-    "expertise.adv2": "Bilingual services in French and English",
-    "expertise.adv3": "Secure 24/7 client portal access",
+    "expertise.adv1": "Fiduciary firm specialised in Swiss business management",
+    "expertise.adv2": "Services available in French and English",
+    "expertise.adv3": "Meetings in person or by videoconference",
     "expertise.adv4": "Available Monday to Friday, 9 AM–5 PM",
-    "expertise.adv5": "Absolute discretion and confidentiality",
-    "expertise.adv6": "Transparent fees, no hidden charges",
+    "expertise.adv5": "Specialists in cross-border workers and quasi-resident status",
+    "expertise.adv6": "Document translation in 4 languages: French, English, Spanish, Chinese",
 
     // Contact
     "contact.section.label": "CONTACT US",
