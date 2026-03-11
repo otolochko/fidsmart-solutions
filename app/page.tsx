@@ -1,223 +1,356 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useLanguage } from "@/lib/language-context";
 import Image from "next/image";
+import { useRef, useState } from "react";
 import {
+  FileText,
   Calculator,
   Building2,
   MapPin,
   Settings,
   Users,
-  FileText,
   Globe,
   Megaphone,
   ArrowRight,
+  Check,
+  Mail,
+  Clock,
+  ChevronDown,
+  LockKeyhole,
 } from "lucide-react";
+
+// ─── Data ────────────────────────────────────────────────────────────────────
 
 const mainServices = [
   { key: "services.fiscalite", icon: FileText, delay: 0 },
-  { key: "services.comptabilite", icon: Calculator, delay: 0.1 },
-  { key: "services.creation", icon: Building2, delay: 0.2 },
-  { key: "services.domiciliation", icon: MapPin, delay: 0.3 },
-  { key: "services.gestion", icon: Settings, delay: 0.4 },
-  { key: "services.rh", icon: Users, delay: 0.5 },
+  { key: "services.comptabilite", icon: Calculator, delay: 0.07 },
+  { key: "services.creation", icon: Building2, delay: 0.14 },
+  { key: "services.domiciliation", icon: MapPin, delay: 0.21 },
+  { key: "services.gestion", icon: Settings, delay: 0.28 },
+  { key: "services.rh", icon: Users, delay: 0.35 },
 ];
 
 const complementaryServices = [
   { key: "complementary.traduction", icon: Globe, delay: 0 },
-  { key: "complementary.marketing", icon: Megaphone, delay: 0.1 },
+  { key: "complementary.marketing", icon: Megaphone, delay: 0.07 },
 ];
+
+const expertiseAdvantages = [
+  "expertise.adv1",
+  "expertise.adv2",
+  "expertise.adv3",
+  "expertise.adv4",
+  "expertise.adv5",
+  "expertise.adv6",
+];
+
+// ─── Fade-in wrapper ──────────────────────────────────────────────────────────
+
+function FadeIn({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.7, delay, ease: [0.25, 0.1, 0.25, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// ─── Section label ────────────────────────────────────────────────────────────
+
+function SectionLabel({ text }: { text: string }) {
+  return (
+    <div className="flex items-center gap-3 justify-center mb-5">
+      <span className="block w-8 h-px bg-[#D4AF37]" />
+      <span className="text-[#D4AF37] text-[10px] font-semibold tracking-[0.25em] uppercase">
+        {text}
+      </span>
+      <span className="block w-8 h-px bg-[#D4AF37]" />
+    </div>
+  );
+}
+
+// ─── Main Page ────────────────────────────────────────────────────────────────
 
 export default function Home() {
   const { t } = useLanguage();
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  const [formState, setFormState] = useState({ name: "", email: "", message: "" });
 
   return (
-    <div className="relative">
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-            backgroundSize: '40px 40px'
-          }} />
-        </div>
+    <div className="relative bg-[#fdfbf7] dark:bg-[#0f0f1a]">
 
-        {/* Gradient Orbs */}
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+      {/* ── HERO ──────────────────────────────────────────────────────── */}
+      <section
+        ref={heroRef}
+        className="relative min-h-screen -mt-16 lg:-mt-20 flex items-center justify-center overflow-hidden"
+      >
+        {/* Parallax background image */}
+        <motion.div className="absolute inset-0" style={{ y: heroY }}>
+          <Image
+            src="/hero-image.png"
+            alt="Geneva lakefront"
+            fill
+            className="object-cover"
+            priority
+            quality={90}
+          />
+        </motion.div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left Content */}
-            <div className="text-center lg:text-left">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold tracking-tight mb-6">
-                  <span className="text-foreground">{t("hero.title").split(" ")[0]}</span>
-                  <br />
-                  <span className="text-accent">{t("hero.title").split(" ")[1] || "Solutions"}</span>
-                </h1>
-              </motion.div>
+        {/* Gradient overlay — deep navy with subtle gradient direction */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(160deg, rgba(10,20,35,0.92) 0%, rgba(26,43,60,0.85) 50%, rgba(10,20,35,0.90) 100%)",
+          }}
+        />
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                className="text-lg sm:text-xl text-muted max-w-2xl mx-auto lg:mx-0 mb-10"
-              >
-                {t("hero.subtitle")}
-              </motion.p>
+        {/* Subtle grain texture */}
+        <div
+          className="absolute inset-0 opacity-[0.035] pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
+            backgroundSize: "200px 200px",
+          }}
+        />
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-              >
-                <a
-                  href="/services"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent text-accent-foreground font-semibold rounded-full hover:brightness-110 transition-all duration-300 group"
-                >
-                  {t("nav.services")}
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </a>
-                <a
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-border text-foreground font-semibold rounded-full hover:border-accent hover:text-accent transition-all duration-300"
-                >
-                  {t("nav.contact")}
-                </a>
-              </motion.div>
-            </div>
+        {/* Gold thin top rule */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent" />
 
-            {/* Right Image */}
-            <motion.div
-              initial={{ opacity: 0, x: 50, scale: 0.9 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="relative hidden lg:block"
+        {/* Content */}
+        <motion.div
+          style={{ opacity: heroOpacity }}
+          className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        >
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex items-center justify-center gap-3 mb-10"
+          >
+            <span className="block w-8 h-px bg-[#D4AF37]/60" />
+            <span className="text-[#D4AF37]/80 text-[10px] font-semibold tracking-[0.3em] uppercase">
+              {t("hero.badge")}
+            </span>
+            <span className="block w-8 h-px bg-[#D4AF37]/60" />
+          </motion.div>
+
+          {/* H1 */}
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+            className="font-display font-bold leading-[0.92] mb-8"
+          >
+            <span className="block text-white text-[clamp(3.5rem,10vw,8rem)]">
+              {t("hero.headline1")}
+            </span>
+            <span
+              className="block text-[clamp(3.5rem,10vw,8rem)]"
+              style={{ color: "#D4AF37" }}
             >
-              <div className="relative z-10 rounded-2xl overflow-hidden border-8 border-card shadow-2xl shadow-accent/10">
-                <Image
-                  src="/hero-image-branded.png"
-                  alt="Fidsmart Branded Office"
-                  width={1024}
-                  height={1024}
-                  className="w-full h-auto object-cover"
-                  priority
-                />
-              </div>
-              {/* Decorative Elements */}
-              <div className="absolute -top-6 -right-6 w-32 h-32 border-t-2 border-r-2 border-accent rounded-tr-3xl opacity-50" />
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 border-b-2 border-l-2 border-accent rounded-bl-3xl opacity-50" />
-            </motion.div>
-          </div>
-        </div>
+              {t("hero.headline2")}
+            </span>
+          </motion.h1>
 
-        {/* Scroll Indicator */}
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            className="text-white/60 text-base sm:text-lg max-w-2xl mx-auto mb-12 leading-relaxed"
+          >
+            {t("hero.subtitle2")}
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.45, ease: "easeOut" }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            {/* Ghost */}
+            <motion.a
+              href="#services"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/30 text-white text-sm font-medium tracking-wide rounded-sm hover:border-white/60 hover:bg-white/5 transition-all duration-300"
+            >
+              {t("hero.cta.services")}
+            </motion.a>
+
+            {/* Solid gold */}
+            <motion.a
+              href="#contact"
+              whileHover={{ scale: 1.02, backgroundColor: "#c9a227" }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold tracking-wide rounded-sm transition-all duration-300 group"
+              style={{ backgroundColor: "#D4AF37", color: "#0f1a24" }}
+            >
+              {t("hero.cta.contact")}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
+            </motion.a>
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          transition={{ delay: 1.2, duration: 0.6 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            className="w-6 h-10 border-2 border-muted rounded-full flex justify-center pt-2"
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
           >
-            <div className="w-1 h-2 bg-muted rounded-full" />
+            <ChevronDown className="w-5 h-5 text-white/30" strokeWidth={1.5} />
           </motion.div>
         </motion.div>
+
+        {/* Bottom gold rule */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
       </section>
 
-      {/* Main Services Section */}
-      <section className="py-20 lg:py-32 bg-card/50">
+      {/* ── STATS STRIP ──────────────────────────────────────────────── */}
+      <section className="bg-[#1A2B3C] border-b border-[#D4AF37]/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4">
+            {[
+              { label: t("stats.since.label"), value: t("stats.since.value") },
+              { label: t("stats.clients.label"), value: t("stats.clients.value") },
+              { label: t("stats.services.label"), value: t("stats.services.value") },
+              { label: t("stats.languages.label"), value: t("stats.languages.value") },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className={`py-8 px-6 text-center ${
+                  i < 3 ? "border-r border-[#D4AF37]/10" : ""
+                }`}
+              >
+                <div
+                  className="font-display font-bold text-3xl sm:text-4xl mb-1"
+                  style={{ color: "#D4AF37" }}
+                >
+                  {stat.value}
+                </div>
+                <div className="text-white/50 text-xs tracking-wide uppercase">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SERVICES ─────────────────────────────────────────────────── */}
+      <section
+        id="services"
+        className="py-24 lg:py-36 bg-[#fdfbf7] dark:bg-[#0f1520]"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-16">
+            <SectionLabel text={t("services.section.label")} />
+            <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-[#1A2B3C] dark:text-white mb-5 leading-tight">
               {t("services.title")}
             </h2>
-            <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
-          </motion.div>
+            <p className="text-[#1A2B3C]/60 dark:text-white/50 max-w-xl mx-auto text-base leading-relaxed">
+              {t("services.section.subtitle")}
+            </p>
+          </FadeIn>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#e5e7eb] dark:bg-[#D4AF37]/10">
             {mainServices.map((service) => {
               const Icon = service.icon;
               return (
                 <motion.div
                   key={service.key}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: service.delay }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="group relative bg-card border border-border rounded-2xl p-8 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/5 transition-all duration-300"
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.55, delay: service.delay }}
+                  whileHover={{ y: -4 }}
+                  className="group bg-white dark:bg-[#0f1520] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl hover:shadow-[#1A2B3C]/5 dark:hover:shadow-black/20 relative overflow-hidden"
                 >
-                  <div className="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors duration-300">
-                    <Icon className="w-7 h-7 text-accent" />
+                  {/* Gold accent bar on hover */}
+                  <div className="absolute top-0 left-0 w-full h-0.5 bg-[#D4AF37] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+
+                  <div className="w-12 h-12 rounded-sm border border-[#D4AF37]/30 group-hover:border-[#D4AF37]/70 flex items-center justify-center mb-6 transition-colors duration-300">
+                    <Icon
+                      className="w-5 h-5 text-[#D4AF37]"
+                      strokeWidth={1.5}
+                    />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                  <h3 className="font-display font-bold text-xl text-[#1A2B3C] dark:text-white mb-3">
                     {t(service.key)}
                   </h3>
-                  <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <ArrowRight className="w-5 h-5 text-accent" />
+                  <p className="text-sm text-[#1A2B3C]/55 dark:text-white/45 leading-relaxed">
+                    {t(`${service.key}.desc`)}
+                  </p>
+                  <div className="mt-6 flex items-center gap-2 text-[#D4AF37] text-xs font-semibold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span>En savoir plus</span>
+                    <ArrowRight className="w-3.5 h-3.5" strokeWidth={2} />
                   </div>
                 </motion.div>
               );
             })}
           </div>
-        </div>
-      </section>
 
-      {/* Complementary Services Section */}
-      <section className="py-20 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4">
-              {t("complementary.title")}
-            </h2>
-            <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 max-w-3xl mx-auto">
+          {/* Complementary services */}
+          <div className="mt-px grid grid-cols-1 sm:grid-cols-2 gap-px bg-[#e5e7eb] dark:bg-[#D4AF37]/10">
             {complementaryServices.map((service) => {
               const Icon = service.icon;
               return (
                 <motion.div
                   key={service.key}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: service.delay }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="group relative bg-card border border-border rounded-2xl p-8 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/5 transition-all duration-300"
+                  transition={{ duration: 0.55, delay: service.delay }}
+                  whileHover={{ y: -4 }}
+                  className="group bg-white dark:bg-[#0f1520] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl relative overflow-hidden"
                 >
-                  <div className="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors duration-300">
-                    <Icon className="w-7 h-7 text-accent" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
-                    {t(service.key)}
-                  </h3>
-                  <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <ArrowRight className="w-5 h-5 text-accent" />
+                  <div className="absolute top-0 left-0 w-full h-0.5 bg-[#D4AF37] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                  <div className="flex items-start gap-6">
+                    <div className="w-12 h-12 shrink-0 rounded-sm border border-[#D4AF37]/30 group-hover:border-[#D4AF37]/70 flex items-center justify-center transition-colors duration-300">
+                      <Icon className="w-5 h-5 text-[#D4AF37]" strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <h3 className="font-display font-bold text-xl text-[#1A2B3C] dark:text-white mb-2">
+                        {t(service.key)}
+                      </h3>
+                      <p className="text-sm text-[#1A2B3C]/55 dark:text-white/45 leading-relaxed">
+                        {t(`${service.key}.desc`)}
+                      </p>
+                    </div>
                   </div>
                 </motion.div>
               );
@@ -226,30 +359,319 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 lg:py-32 bg-card/50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-gradient-to-br from-accent/5 to-accent/10 border border-accent/20 rounded-3xl p-10 lg:p-16"
-          >
-            <h2 className="text-3xl sm:text-4xl font-display font-bold mb-4">
-              Prêt à commencer?
+      {/* ── SWISS ADVANTAGE ──────────────────────────────────────────── */}
+      <section className="bg-[#1A2B3C] overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
+            {/* Left — image */}
+            <div className="relative overflow-hidden min-h-[380px] lg:min-h-0">
+              <Image
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80"
+                alt="Professional Geneva office"
+                fill
+                className="object-cover"
+              />
+              {/* Dark navy overlay */}
+              <div className="absolute inset-0 bg-[#1A2B3C]/40" />
+
+              {/* Decorative corner accents */}
+              <div className="absolute top-8 left-8 w-16 h-16 border-t border-l border-[#D4AF37]/50" />
+              <div className="absolute bottom-8 right-8 w-16 h-16 border-b border-r border-[#D4AF37]/50" />
+
+              {/* Floating badge */}
+              <div className="absolute bottom-10 left-10 bg-[#1A2B3C]/90 backdrop-blur-sm border border-[#D4AF37]/30 px-5 py-4">
+                <div className="text-[#D4AF37] font-display font-bold text-2xl">
+                  2022
+                </div>
+                <div className="text-white/60 text-xs tracking-widest uppercase mt-0.5">
+                  Fondé à Genève
+                </div>
+              </div>
+            </div>
+
+            {/* Right — content */}
+            <div className="px-8 py-16 lg:px-16 lg:py-20 flex flex-col justify-center">
+              <FadeIn>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="block w-8 h-px bg-[#D4AF37]/60" />
+                  <span className="text-[#D4AF37] text-[10px] font-semibold tracking-[0.25em] uppercase">
+                    {t("expertise.section.label")}
+                  </span>
+                </div>
+                <h2 className="font-display font-bold text-4xl sm:text-5xl text-white leading-tight mb-5">
+                  {t("expertise.title")}
+                </h2>
+                <p className="text-white/50 text-sm leading-relaxed mb-10 max-w-md">
+                  {t("expertise.subtitle")}
+                </p>
+
+                <ul className="space-y-4">
+                  {expertiseAdvantages.map((key, i) => (
+                    <motion.li
+                      key={key}
+                      initial={{ opacity: 0, x: -16 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.07 }}
+                      className="flex items-start gap-4"
+                    >
+                      <div
+                        className="w-5 h-5 shrink-0 rounded-sm flex items-center justify-center mt-0.5"
+                        style={{ backgroundColor: "rgba(212,175,55,0.15)", border: "1px solid rgba(212,175,55,0.4)" }}
+                      >
+                        <Check className="w-3 h-3 text-[#D4AF37]" strokeWidth={2.5} />
+                      </div>
+                      <span className="text-white/75 text-sm leading-snug">
+                        {t(key)}
+                      </span>
+                    </motion.li>
+                  ))}
+                </ul>
+
+                <div className="mt-10">
+                  <motion.a
+                    href="/a-propos"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="inline-flex items-center gap-2 text-[#D4AF37] text-sm font-semibold tracking-wide group"
+                  >
+                    En savoir plus sur Fidsmart
+                    <ArrowRight
+                      className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                      strokeWidth={2}
+                    />
+                  </motion.a>
+                </div>
+              </FadeIn>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CLIENT PORTAL CTA STRIP ──────────────────────────────────── */}
+      <section className="bg-[#0d1e2e] border-y border-[#D4AF37]/15 py-14">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <FadeIn className="text-center md:text-left">
+              <div className="flex items-center gap-3 mb-3 justify-center md:justify-start">
+                <LockKeyhole className="w-5 h-5 text-[#D4AF37]" strokeWidth={1.5} />
+                <span className="text-[#D4AF37] text-xs font-semibold tracking-[0.2em] uppercase">
+                  Portail Client Sécurisé
+                </span>
+              </div>
+              <h3 className="font-display font-bold text-2xl sm:text-3xl text-white">
+                Accédez à vos documents à tout moment
+              </h3>
+              <p className="text-white/45 text-sm mt-2 max-w-md">
+                Espace dédié pour consulter vos dossiers, télécharger vos documents comptables et communiquer avec votre gestionnaire.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.15}>
+              <motion.a
+                href="/portail-client"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-3 px-8 py-4 border border-[#D4AF37]/50 text-[#D4AF37] text-sm font-semibold tracking-wide rounded-sm hover:bg-[#D4AF37]/10 transition-all duration-300 group whitespace-nowrap"
+              >
+                <LockKeyhole className="w-4 h-4" strokeWidth={1.5} />
+                Accéder au portail
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
+              </motion.a>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CONTACT ──────────────────────────────────────────────────── */}
+      <section
+        id="contact"
+        className="py-24 lg:py-36 bg-[#fdfbf7] dark:bg-[#0f1520]"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-16">
+            <SectionLabel text={t("contact.section.label")} />
+            <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-[#1A2B3C] dark:text-white mb-5 leading-tight">
+              {t("contact.title")}
             </h2>
-            <p className="text-muted mb-8 max-w-xl mx-auto">
-              Contactez-nous pour discuter de vos besoins et découvrir comment nous pouvons vous aider.
+            <p className="text-[#1A2B3C]/55 dark:text-white/45 max-w-lg mx-auto text-base leading-relaxed">
+              {t("contact.subtitle")}
             </p>
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent text-accent-foreground font-semibold rounded-full hover:brightness-110 transition-all duration-300 group"
-            >
-              {t("nav.contact")}
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </motion.div>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-[#e5e7eb] dark:bg-[#D4AF37]/10">
+            {/* Map placeholder */}
+            <FadeIn className="bg-white dark:bg-[#0f1520] p-8 lg:p-10 flex flex-col gap-6">
+              {/* Styled map mockup */}
+              <div className="relative w-full aspect-[4/3] rounded-sm overflow-hidden bg-[#1A2B3C]">
+                {/* Map grid lines */}
+                <svg
+                  className="absolute inset-0 w-full h-full opacity-20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <pattern
+                      id="mapgrid"
+                      width="40"
+                      height="40"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <path
+                        d="M 40 0 L 0 0 0 40"
+                        fill="none"
+                        stroke="#D4AF37"
+                        strokeWidth="0.5"
+                      />
+                    </pattern>
+                  </defs>
+                  <rect width="100%" height="100%" fill="url(#mapgrid)" />
+                  {/* Simulated road lines */}
+                  <line x1="20%" y1="0" x2="40%" y2="100%" stroke="#D4AF37" strokeWidth="1" opacity="0.6" />
+                  <line x1="55%" y1="0" x2="70%" y2="100%" stroke="#D4AF37" strokeWidth="1" opacity="0.6" />
+                  <line x1="0" y1="35%" x2="100%" y2="45%" stroke="#D4AF37" strokeWidth="1.5" opacity="0.5" />
+                  <line x1="0" y1="65%" x2="100%" y2="70%" stroke="#D4AF37" strokeWidth="1" opacity="0.4" />
+                  <line x1="0" y1="15%" x2="100%" y2="25%" stroke="#D4AF37" strokeWidth="0.8" opacity="0.3" />
+                </svg>
+
+                {/* Location label */}
+                <div className="absolute top-3 left-3 bg-[#1A2B3C]/80 backdrop-blur-sm border border-[#D4AF37]/30 px-3 py-1.5">
+                  <span className="text-[#D4AF37] text-[10px] tracking-widest font-semibold uppercase">
+                    Genève, Suisse
+                  </span>
+                </div>
+
+                {/* Pulsing pin */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+                  <motion.div
+                    animate={{ scale: [1, 1.6, 1], opacity: [0.5, 0, 0.5] }}
+                    transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute w-10 h-10 rounded-full"
+                    style={{ backgroundColor: "rgba(212,175,55,0.2)" }}
+                  />
+                  <div
+                    className="w-5 h-5 rounded-full border-2 border-[#D4AF37] flex items-center justify-center relative z-10"
+                    style={{ backgroundColor: "rgba(212,175,55,0.3)" }}
+                  >
+                    <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+                  </div>
+                  <div className="w-px h-4 bg-[#D4AF37]" />
+                </div>
+              </div>
+
+              {/* Contact details */}
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 shrink-0 rounded-sm border border-[#D4AF37]/30 flex items-center justify-center">
+                    <MapPin className="w-4 h-4 text-[#D4AF37]" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] text-[#1A2B3C]/40 dark:text-white/35 uppercase tracking-wider mb-0.5">
+                      Adresse
+                    </div>
+                    <div className="text-sm text-[#1A2B3C] dark:text-white/80 font-medium">
+                      {t("contact.address")}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 shrink-0 rounded-sm border border-[#D4AF37]/30 flex items-center justify-center">
+                    <Clock className="w-4 h-4 text-[#D4AF37]" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] text-[#1A2B3C]/40 dark:text-white/35 uppercase tracking-wider mb-0.5">
+                      Horaires
+                    </div>
+                    <div className="text-sm text-[#1A2B3C] dark:text-white/80 font-medium">
+                      {t("contact.hours")}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 shrink-0 rounded-sm border border-[#D4AF37]/30 flex items-center justify-center">
+                    <Mail className="w-4 h-4 text-[#D4AF37]" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] text-[#1A2B3C]/40 dark:text-white/35 uppercase tracking-wider mb-0.5">
+                      Email
+                    </div>
+                    <div className="text-sm text-[#1A2B3C] dark:text-white/80 font-medium">
+                      info@fidsmart-solutions.ch
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* Contact form */}
+            <FadeIn delay={0.1} className="bg-white dark:bg-[#0f1520] p-8 lg:p-10">
+              <form
+                onSubmit={(e) => e.preventDefault()}
+                className="space-y-6 h-full flex flex-col justify-between"
+              >
+                <div className="space-y-5">
+                  <div>
+                    <label className="block text-[10px] font-semibold tracking-[0.2em] uppercase text-[#1A2B3C]/50 dark:text-white/40 mb-2">
+                      {t("contact.form.name")}
+                    </label>
+                    <input
+                      type="text"
+                      value={formState.name}
+                      onChange={(e) =>
+                        setFormState((s) => ({ ...s, name: e.target.value }))
+                      }
+                      placeholder={t("contact.form.placeholder.name")}
+                      className="w-full px-4 py-3 bg-transparent border border-[#e5e7eb] dark:border-[#D4AF37]/15 text-[#1A2B3C] dark:text-white text-sm placeholder:text-[#1A2B3C]/30 dark:placeholder:text-white/25 outline-none focus:border-[#D4AF37]/60 transition-colors duration-300 rounded-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-semibold tracking-[0.2em] uppercase text-[#1A2B3C]/50 dark:text-white/40 mb-2">
+                      {t("contact.form.email")}
+                    </label>
+                    <input
+                      type="email"
+                      value={formState.email}
+                      onChange={(e) =>
+                        setFormState((s) => ({ ...s, email: e.target.value }))
+                      }
+                      placeholder={t("contact.form.placeholder.email")}
+                      className="w-full px-4 py-3 bg-transparent border border-[#e5e7eb] dark:border-[#D4AF37]/15 text-[#1A2B3C] dark:text-white text-sm placeholder:text-[#1A2B3C]/30 dark:placeholder:text-white/25 outline-none focus:border-[#D4AF37]/60 transition-colors duration-300 rounded-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-semibold tracking-[0.2em] uppercase text-[#1A2B3C]/50 dark:text-white/40 mb-2">
+                      {t("contact.form.message")}
+                    </label>
+                    <textarea
+                      rows={6}
+                      value={formState.message}
+                      onChange={(e) =>
+                        setFormState((s) => ({ ...s, message: e.target.value }))
+                      }
+                      placeholder={t("contact.form.placeholder.message")}
+                      className="w-full px-4 py-3 bg-transparent border border-[#e5e7eb] dark:border-[#D4AF37]/15 text-[#1A2B3C] dark:text-white text-sm placeholder:text-[#1A2B3C]/30 dark:placeholder:text-white/25 outline-none focus:border-[#D4AF37]/60 transition-colors duration-300 rounded-sm resize-none"
+                    />
+                  </div>
+                </div>
+
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full py-4 text-sm font-semibold tracking-wider uppercase transition-colors duration-300 rounded-sm flex items-center justify-center gap-2 group"
+                  style={{ backgroundColor: "#D4AF37", color: "#0f1a24" }}
+                >
+                  {t("contact.form.submit")}
+                  <ArrowRight
+                    className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                    strokeWidth={2}
+                  />
+                </motion.button>
+              </form>
+            </FadeIn>
+          </div>
         </div>
       </section>
     </div>

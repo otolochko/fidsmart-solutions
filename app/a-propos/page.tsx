@@ -42,7 +42,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-6 flex flex-col items-center gap-2"
+            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold mb-6 flex flex-col items-center gap-2 leading-tight"
           >
             <span>{t("about.hero.title")}</span>
             <span className="text-accent underline decoration-2 underline-offset-8">Fidsmart Solutions</span>
