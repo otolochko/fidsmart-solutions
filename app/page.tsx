@@ -16,6 +16,7 @@ import {
   ArrowRight,
   Check,
   Mail,
+  Phone,
   Clock,
   ChevronDown,
   LockKeyhole,
@@ -123,7 +124,7 @@ export default function Home() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(160deg, rgba(10,20,35,0.92) 0%, rgba(26,43,60,0.85) 50%, rgba(10,20,35,0.90) 100%)",
+              "linear-gradient(to bottom, rgba(10,20,35,0.88) 0%, rgba(0,0,0,0.55) 50%, rgba(10,20,35,0.88) 100%)",
           }}
         />
 
@@ -181,7 +182,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="text-white/60 text-base sm:text-lg max-w-2xl mx-auto mb-12 leading-relaxed"
+            className="text-white/70 text-base sm:text-lg max-w-2xl mx-auto mb-12 leading-relaxed"
           >
             {t("hero.subtitle2")}
           </motion.p>
@@ -575,6 +576,23 @@ export default function Home() {
 
                 <div className="flex items-start gap-4">
                   <div className="w-9 h-9 shrink-0 rounded-sm border border-[#D4AF37]/30 flex items-center justify-center">
+                    <Phone className="w-4 h-4 text-[#D4AF37]" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] text-[#1A2B3C]/40 dark:text-white/35 uppercase tracking-wider mb-0.5">
+                      Téléphone
+                    </div>
+                    <a
+                      href={`tel:${t("contact.phone")}`}
+                      className="text-sm text-[#1A2B3C] dark:text-white/80 font-medium hover:text-[#D4AF37] transition-colors"
+                    >
+                      {t("contact.phone")}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 shrink-0 rounded-sm border border-[#D4AF37]/30 flex items-center justify-center">
                     <Clock className="w-4 h-4 text-[#D4AF37]" strokeWidth={1.5} />
                   </div>
                   <div>
@@ -595,9 +613,12 @@ export default function Home() {
                     <div className="text-[10px] text-[#1A2B3C]/40 dark:text-white/35 uppercase tracking-wider mb-0.5">
                       Email
                     </div>
-                    <div className="text-sm text-[#1A2B3C] dark:text-white/80 font-medium">
-                      info@fidsmart-solutions.ch
-                    </div>
+                    <a
+                      href={`mailto:${t("contact.email")}`}
+                      className="text-sm text-[#1A2B3C] dark:text-white/80 font-medium hover:text-[#D4AF37] transition-colors"
+                    >
+                      {t("contact.email")}
+                    </a>
                   </div>
                 </div>
               </div>
