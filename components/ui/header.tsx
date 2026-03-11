@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useLanguage } from "@/lib/language-context";
 import { LanguageToggle } from "./language-toggle";
+import { ThemeToggle } from "./theme-toggle";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Menu, X, ChevronDown, FileText, Calculator, Building2, FolderOpen, ArrowLeftRight, Sparkles, CalendarDays } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useTheme } from "next-themes";
 
 const serviceDropdownItems = [
   { key: "nav.service.fiscalite", href: "/fiscalite", icon: FileText },
@@ -28,17 +30,42 @@ export function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+
   const { scrollY } = useScroll();
-  const headerBg = useTransform(
+  const headerBgDark = useTransform(
     scrollY,
     [0, 80],
     ["rgba(51,53,51,0)", "rgba(36,36,35,0.96)"]
   );
-  const headerBorder = useTransform(
+  const headerBgLight = useTransform(
+    scrollY,
+    [0, 80],
+    ["rgba(250,250,248,0)", "rgba(250,250,248,0.96)"]
+  );
+  const headerBorderDark = useTransform(
     scrollY,
     [0, 80],
     ["rgba(245,203,92,0)", "rgba(245,203,92,0.18)"]
   );
+  const headerBorderLight = useTransform(
+    scrollY,
+    [0, 80],
+    ["rgba(212,168,50,0)", "rgba(226,226,222,0.8)"]
+  );
+
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const unsub = scrollY.on("change", (v) => setIsScrolled(v > 60));
+    return unsub;
+  }, [scrollY]);
+
+  // When transparent (top of page), always use white text — hero has a dark photo overlay.
+  // When scrolled + light mode, switch to foreground. Dark mode is always white.
+  const navTextClass = isScrolled && !isDark
+    ? "text-foreground/70 hover:text-foreground"
+    : "text-white/70 hover:text-white";
 
   function openDropdown() {
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
@@ -53,7 +80,7 @@ export function Header() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      style={{ backgroundColor: headerBg, borderBottomColor: headerBorder }}
+      style={{ backgroundColor: isDark ? headerBgDark : headerBgLight, borderBottomColor: isDark ? headerBorderDark : headerBorderLight }}
       className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,7 +106,7 @@ export function Header() {
             >
               <Link
                 href="/#services"
-                className="flex items-center gap-1 text-sm font-medium tracking-wide text-white/70 hover:text-white transition-colors duration-300 relative group"
+                className={`flex items-center gap-1 text-sm font-medium tracking-wide ${navTextClass} transition-colors duration-300 relative group`}
               >
                 {t("nav.services")}
                 <ChevronDown
@@ -98,11 +125,11 @@ export function Header() {
                     transition={{ duration: 0.18, ease: "easeOut" }}
                     onMouseEnter={openDropdown}
                     onMouseLeave={closeDropdown}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-[#2a2a28]/95 backdrop-blur-md border border-[#F5CB5C]/20 shadow-2xl shadow-black/40"
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-card/95 backdrop-blur-md border border-accent/20 shadow-2xl shadow-black/20 dark:shadow-black/40"
                     style={{ borderRadius: "2px" }}
                   >
                     {/* Top gold rule */}
-                    <div className="h-px w-full bg-gradient-to-r from-transparent via-[#F5CB5C]/50 to-transparent" />
+                    <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
 
                     <div className="py-2">
                       {serviceDropdownItems.map((item, i) => {
@@ -112,7 +139,7 @@ export function Header() {
                             key={item.key}
                             href={item.href}
                             onClick={() => setDropdownOpen(false)}
-                            className="flex items-center gap-3 px-4 py-2.5 text-white/65 hover:text-white hover:bg-white/5 transition-colors duration-150 group/item"
+                            className="flex items-center gap-3 px-4 py-2.5 text-foreground/65 hover:text-foreground hover:bg-foreground/5 transition-colors duration-150 group/item"
                           >
                             <div className="w-7 h-7 shrink-0 flex items-center justify-center rounded-sm border border-[#F5CB5C]/0 group-hover/item:border-[#F5CB5C]/30 transition-colors duration-150"
                               style={{ backgroundColor: "rgba(245,203,92,0)" }}
@@ -125,7 +152,7 @@ export function Header() {
                       })}
                     </div>
 
-                    <div className="h-px w-full bg-gradient-to-r from-transparent via-[#F5CB5C]/20 to-transparent" />
+                    <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -136,7 +163,7 @@ export function Header() {
               <Link
                 key={link.key}
                 href={link.href}
-                className="text-sm font-medium tracking-wide text-white/70 hover:text-white transition-colors duration-300 relative group"
+                className={`text-sm font-medium tracking-wide ${navTextClass} transition-colors duration-300 relative group`}
               >
                 {t(link.key)}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#F5CB5C] transition-all duration-300 group-hover:w-full" />
@@ -155,13 +182,14 @@ export function Header() {
                 <CalendarDays className="w-3.5 h-3.5" strokeWidth={2} />
                 {t("nav.rendez-vous")}
               </Link>
+              <ThemeToggle />
               <LanguageToggle />
             </div>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-sm border border-white/20 text-white"
+              className={`md:hidden p-2 rounded-sm border ${isScrolled && !isDark ? "border-foreground/20 text-foreground" : "border-white/20 text-white"}`}
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -176,7 +204,7 @@ export function Header() {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-[#1c1c1b] border-b border-[#F5CB5C]/20"
+          className="md:hidden bg-card border-b border-accent/20"
         >
           <nav className="flex flex-col gap-1 px-4 py-4">
             {/* Services accordion */}
@@ -184,13 +212,13 @@ export function Header() {
               <Link
                 href="/#services"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex-1 text-base font-medium text-white/70 hover:text-white hover:bg-white/5 px-4 py-3 rounded-sm transition-colors duration-200"
+                className="flex-1 text-base font-medium text-foreground/70 hover:text-foreground hover:bg-foreground/5 px-4 py-3 rounded-sm transition-colors duration-200"
               >
                 {t("nav.services")}
               </Link>
               <button
                 onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                className="p-3 text-white/50 hover:text-white transition-colors duration-200"
+                className="p-3 text-foreground/50 hover:text-foreground transition-colors duration-200"
               >
                 <ChevronDown
                   className={`w-4 h-4 transition-transform duration-200 ${mobileServicesOpen ? "rotate-180" : ""}`}
@@ -200,7 +228,7 @@ export function Header() {
             </div>
 
             {mobileServicesOpen && (
-              <div className="pl-4 border-l border-[#F5CB5C]/20 ml-4 mb-1">
+              <div className="pl-4 border-l border-accent/20 ml-4 mb-1">
                 {serviceDropdownItems.map((item) => {
                   const Icon = item.icon;
                   return (
@@ -208,7 +236,7 @@ export function Header() {
                       key={item.key}
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center gap-3 text-sm text-white/60 hover:text-white px-4 py-2.5 hover:bg-white/5 rounded-sm transition-colors duration-150"
+                      className="flex items-center gap-3 text-sm text-foreground/60 hover:text-foreground px-4 py-2.5 hover:bg-foreground/5 rounded-sm transition-colors duration-150"
                     >
                       <Icon className="w-4 h-4 text-[#F5CB5C]/70 shrink-0" strokeWidth={1.5} />
                       {t(item.key)}
@@ -223,13 +251,13 @@ export function Header() {
                 key={link.key}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-white/70 hover:text-white hover:bg-white/5 px-4 py-3 rounded-sm transition-colors duration-200"
+                className="text-base font-medium text-foreground/70 hover:text-foreground hover:bg-foreground/5 px-4 py-3 rounded-sm transition-colors duration-200"
               >
                 {t(link.key)}
               </Link>
             ))}
 
-            <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between px-4">
+            <div className="mt-3 pt-3 border-t border-foreground/10 flex items-center justify-between px-4">
               <Link
                 href="/rendez-vous"
                 onClick={() => setMobileMenuOpen(false)}
@@ -239,6 +267,7 @@ export function Header() {
                 <CalendarDays className="w-3.5 h-3.5" strokeWidth={2} />
                 {t("nav.rendez-vous")}
               </Link>
+              <ThemeToggle />
               <LanguageToggle />
             </div>
           </nav>

@@ -240,7 +240,7 @@ export default function Home() {
       </section>
 
       {/* ── STATS STRIP ──────────────────────────────────────────────── */}
-      <section className="bg-[#242423] border-b border-[#F5CB5C]/15">
+      <section className="bg-[#1a1a19] dark:bg-[#242423] border-b border-accent/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4">
             {[
@@ -255,9 +255,8 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className={`py-8 px-6 text-center ${
-                  i < 3 ? "border-r border-[#F5CB5C]/10" : ""
-                }`}
+                className={`py-8 px-6 text-center ${i < 3 ? "border-r border-accent/10" : ""
+                  }`}
               >
                 <div
                   className="font-display font-bold text-3xl sm:text-4xl mb-1"
@@ -265,7 +264,7 @@ export default function Home() {
                 >
                   {stat.value}
                 </div>
-                <div className="text-white/50 text-xs tracking-wide uppercase">
+                <div className="text-white/70 dark:text-white/50 text-xs tracking-wide uppercase">
                   {stat.label}
                 </div>
               </motion.div>
@@ -396,7 +395,7 @@ export default function Home() {
       </section>
 
       {/* ── SWISS ADVANTAGE ──────────────────────────────────────────── */}
-      <section className="bg-[#242423] overflow-hidden">
+      <section className="bg-[#f0ede4] dark:bg-[#242423] overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
             {/* Left — image */}
@@ -434,10 +433,10 @@ export default function Home() {
                     {t("expertise.section.label")}
                   </span>
                 </div>
-                <h2 className="font-display font-bold text-4xl sm:text-5xl text-white leading-tight mb-5">
+                <h2 className="font-display font-bold text-4xl sm:text-5xl text-[#242423] dark:text-white leading-tight mb-5">
                   {t("expertise.title")}
                 </h2>
-                <p className="text-white/50 text-sm leading-relaxed mb-10 max-w-md">
+                <p className="text-[#242423]/60 dark:text-white/50 text-sm leading-relaxed mb-10 max-w-md">
                   {t("expertise.subtitle")}
                 </p>
 
@@ -457,7 +456,7 @@ export default function Home() {
                       >
                         <Check className="w-3 h-3 text-[#F5CB5C]" strokeWidth={2.5} />
                       </div>
-                      <span className="text-white/75 text-sm leading-snug">
+                      <span className="text-[#242423]/80 dark:text-white/75 text-sm leading-snug">
                         {t(key)}
                       </span>
                     </motion.li>
