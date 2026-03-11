@@ -7,16 +7,18 @@ import { motion } from "framer-motion";
 
 const footerLinks = [
   { key: "nav.home", href: "/" },
-  { key: "nav.services", href: "/services" },
+  { key: "nav.services", href: "/#services" },
   { key: "nav.about", href: "/a-propos" },
   { key: "nav.contact", href: "/contact" },
 ];
 
 const serviceLinks = [
-  { key: "services.creation", href: "/creation-d-entreprise" },
-  { key: "services.comptabilite", href: "/comptabilite" },
-  { key: "services.fiscalite", href: "/fiscalite" },
-  { key: "services.rh", href: "/ressources-humaines" },
+  { key: "nav.service.fiscalite", href: "/fiscalite" },
+  { key: "nav.service.comptabilite", href: "/comptabilite" },
+  { key: "nav.service.creation", href: "/creation-d-entreprise" },
+  { key: "nav.service.administratif", href: "/administratif" },
+  { key: "nav.service.frontaliers", href: "/frontaliers" },
+  { key: "nav.service.offres", href: "/offres-etendues" },
 ];
 
 export function Footer() {

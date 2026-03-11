@@ -296,13 +296,13 @@ export default function Home() {
               const cardContent = (
                 <>
                   <div className="absolute top-0 left-0 w-full h-0.5 bg-[#F5CB5C] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                  <div className="w-12 h-12 rounded-sm border border-[#F5CB5C]/30 group-hover:border-[#F5CB5C]/70 flex items-center justify-center mb-6 transition-colors duration-300">
-                    <Icon className="w-5 h-5 text-[#F5CB5C]" strokeWidth={1.5} />
+                  <div className="w-12 h-12 rounded-sm border border-[#F5CB5C]/30 group-hover:border-[#F5CB5C] flex items-center justify-center mb-6 transition-all duration-300 group-hover:bg-[#F5CB5C]/10">
+                    <Icon className="w-5 h-5 text-[#F5CB5C] transition-transform duration-300 group-hover:scale-110" strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-display font-bold text-xl text-[#242423] dark:text-white mb-3">
+                  <h3 className="font-display font-bold text-xl text-[#242423] dark:text-white mb-3 group-hover:text-[#242423] dark:group-hover:text-[#F5CB5C] transition-colors duration-300">
                     {t(service.key)}
                   </h3>
-                  <p className="text-sm text-[#242423]/55 dark:text-white/45 leading-relaxed">
+                  <p className="text-sm text-[#242423]/55 dark:text-white/45 leading-relaxed dark:group-hover:text-white/70 transition-colors duration-300">
                     {t(`${service.key}.desc`)}
                   </p>
                   {service.href && (
@@ -315,7 +315,7 @@ export default function Home() {
               );
 
               const className =
-                "group bg-white dark:bg-[#333533] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl hover:shadow-[#242423]/5 dark:hover:shadow-black/20 relative overflow-hidden";
+                "group bg-white dark:bg-[#333533] p-8 lg:p-10 transition-all duration-300 hover:bg-[#fffdf5] dark:hover:bg-[#3c3c39] hover:shadow-xl hover:shadow-[#242423]/5 dark:hover:shadow-black/20 relative overflow-hidden";
 
               return service.href ? (
                 <motion.div
@@ -369,17 +369,17 @@ export default function Home() {
                 >
                   <Link
                     href="/offres-etendues"
-                    className="group bg-white dark:bg-[#333533] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl relative overflow-hidden flex items-start gap-6 block"
+                    className="group bg-white dark:bg-[#333533] p-8 lg:p-10 transition-all duration-300 hover:bg-[#fffdf5] dark:hover:bg-[#3c3c39] hover:shadow-xl relative overflow-hidden flex items-start gap-6 block"
                   >
                     <div className="absolute top-0 left-0 w-full h-0.5 bg-[#F5CB5C] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                    <div className="w-12 h-12 shrink-0 rounded-sm border border-[#F5CB5C]/30 group-hover:border-[#F5CB5C]/70 flex items-center justify-center transition-colors duration-300">
-                      <Icon className="w-5 h-5 text-[#F5CB5C]" strokeWidth={1.5} />
+                    <div className="w-12 h-12 shrink-0 rounded-sm border border-[#F5CB5C]/30 group-hover:border-[#F5CB5C] group-hover:bg-[#F5CB5C]/10 flex items-center justify-center transition-all duration-300">
+                      <Icon className="w-5 h-5 text-[#F5CB5C] transition-transform duration-300 group-hover:scale-110" strokeWidth={1.5} />
                     </div>
                     <div>
-                      <h3 className="font-display font-bold text-xl text-[#242423] dark:text-white mb-2">
+                      <h3 className="font-display font-bold text-xl text-[#242423] dark:text-white mb-2 dark:group-hover:text-[#F5CB5C] transition-colors duration-300">
                         {t(service.key)}
                       </h3>
-                      <p className="text-sm text-[#242423]/55 dark:text-white/45 leading-relaxed">
+                      <p className="text-sm text-[#242423]/55 dark:text-white/45 leading-relaxed dark:group-hover:text-white/70 transition-colors duration-300">
                         {t(`${service.key}.desc`)}
                       </p>
                       <div className="mt-4 flex items-center gap-2 text-[#F5CB5C] text-xs font-semibold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">

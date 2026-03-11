@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useLanguage } from "@/lib/language-context";
 import { LanguageToggle } from "./language-toggle";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { Menu, X, ChevronDown, FileText, Calculator, Building2, FolderOpen, ArrowLeftRight, Sparkles } from "lucide-react";
+import { Menu, X, ChevronDown, FileText, Calculator, Building2, FolderOpen, ArrowLeftRight, Sparkles, CalendarDays } from "lucide-react";
 import { useState, useRef } from "react";
 
 const serviceDropdownItems = [
@@ -18,7 +18,6 @@ const serviceDropdownItems = [
 
 const otherNavLinks = [
   { key: "nav.about", href: "/a-propos" },
-  { key: "nav.rendez-vous", href: "/rendez-vous" },
   { key: "nav.contact", href: "/#contact" },
 ];
 
@@ -78,14 +77,17 @@ export function Header() {
               onMouseEnter={openDropdown}
               onMouseLeave={closeDropdown}
             >
-              <button className="flex items-center gap-1 text-sm font-medium tracking-wide text-white/70 hover:text-white transition-colors duration-300 relative group">
+              <Link
+                href="/#services"
+                className="flex items-center gap-1 text-sm font-medium tracking-wide text-white/70 hover:text-white transition-colors duration-300 relative group"
+              >
                 {t("nav.services")}
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`}
                   strokeWidth={2}
                 />
                 <span className="absolute -bottom-1 left-0 w-full h-px bg-[#F5CB5C] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </button>
+              </Link>
 
               <AnimatePresence>
                 {dropdownOpen && (
@@ -144,7 +146,15 @@ export function Header() {
 
           {/* Controls */}
           <div className="flex items-center gap-3">
-            <div className="hidden md:flex items-center gap-2">
+            <div className="hidden md:flex items-center gap-3">
+              <Link
+                href="/rendez-vous"
+                className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold tracking-wide rounded-sm transition-all duration-300 group"
+                style={{ backgroundColor: "#F5CB5C", color: "#242423" }}
+              >
+                <CalendarDays className="w-3.5 h-3.5" strokeWidth={2} />
+                {t("nav.rendez-vous")}
+              </Link>
               <LanguageToggle />
             </div>
 
@@ -170,16 +180,24 @@ export function Header() {
         >
           <nav className="flex flex-col gap-1 px-4 py-4">
             {/* Services accordion */}
-            <button
-              onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-              className="flex items-center justify-between text-base font-medium text-white/70 hover:text-white hover:bg-white/5 px-4 py-3 rounded-sm transition-colors duration-200 w-full text-left"
-            >
-              {t("nav.services")}
-              <ChevronDown
-                className={`w-4 h-4 transition-transform duration-200 ${mobileServicesOpen ? "rotate-180" : ""}`}
-                strokeWidth={2}
-              />
-            </button>
+            <div className="flex items-center">
+              <Link
+                href="/#services"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex-1 text-base font-medium text-white/70 hover:text-white hover:bg-white/5 px-4 py-3 rounded-sm transition-colors duration-200"
+              >
+                {t("nav.services")}
+              </Link>
+              <button
+                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                className="p-3 text-white/50 hover:text-white transition-colors duration-200"
+              >
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${mobileServicesOpen ? "rotate-180" : ""}`}
+                  strokeWidth={2}
+                />
+              </button>
+            </div>
 
             {mobileServicesOpen && (
               <div className="pl-4 border-l border-[#F5CB5C]/20 ml-4 mb-1">
@@ -211,7 +229,16 @@ export function Header() {
               </Link>
             ))}
 
-            <div className="mt-3 pt-3 border-t border-white/10 flex justify-end px-4">
+            <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between px-4">
+              <Link
+                href="/rendez-vous"
+                onClick={() => setMobileMenuOpen(false)}
+                className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold tracking-wide rounded-sm"
+                style={{ backgroundColor: "#F5CB5C", color: "#242423" }}
+              >
+                <CalendarDays className="w-3.5 h-3.5" strokeWidth={2} />
+                {t("nav.rendez-vous")}
+              </Link>
               <LanguageToggle />
             </div>
           </nav>
