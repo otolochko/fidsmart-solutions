@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/lib/language-context";
-import { ThemeToggle } from "./theme-toggle";
 import { LanguageToggle } from "./language-toggle";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Menu, X, LockKeyhole } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const navLinks = [
@@ -69,20 +68,8 @@ export function Header() {
 
           {/* Controls */}
           <div className="flex items-center gap-3">
-            {/* Client Portal CTA */}
-            <motion.a
-              href="/portail-client"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-[#D4AF37]/60 text-[#D4AF37] text-xs font-semibold tracking-widest uppercase hover:bg-[#D4AF37]/10 transition-colors duration-300"
-            >
-              <LockKeyhole className="w-3.5 h-3.5" strokeWidth={1.5} />
-              {t("nav.clientportal")}
-            </motion.a>
-
             <div className="hidden md:flex items-center gap-2">
               <LanguageToggle />
-              <ThemeToggle />
             </div>
 
             {/* Mobile Menu Button */}
@@ -120,18 +107,8 @@ export function Header() {
                 {t(link.key)}
               </Link>
             ))}
-            <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between px-4">
-              <a
-                href="/portail-client"
-                className="inline-flex items-center gap-2 text-[#D4AF37] text-xs font-semibold tracking-widest uppercase"
-              >
-                <LockKeyhole className="w-3.5 h-3.5" strokeWidth={1.5} />
-                {t("nav.clientportal")}
-              </a>
-              <div className="flex items-center gap-2">
-                <LanguageToggle />
-                <ThemeToggle />
-              </div>
+            <div className="mt-3 pt-3 border-t border-white/10 flex justify-end px-4">
+              <LanguageToggle />
             </div>
           </nav>
         </motion.div>

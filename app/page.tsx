@@ -19,7 +19,6 @@ import {
   Phone,
   Clock,
   ChevronDown,
-  LockKeyhole,
 } from "lucide-react";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -100,7 +99,7 @@ export default function Home() {
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
 
   return (
-    <div className="relative bg-[#fdfbf7] dark:bg-[#0f0f1a]">
+    <div className="relative bg-[#fdfbf7] dark:bg-[#0f1520]">
 
       {/* ── HERO ──────────────────────────────────────────────────────── */}
       <section
@@ -449,39 +448,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CLIENT PORTAL CTA STRIP ──────────────────────────────────── */}
-      <section className="bg-[#0d1e2e] border-y border-[#D4AF37]/15 py-14">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <FadeIn className="text-center md:text-left">
-              <div className="flex items-center gap-3 mb-3 justify-center md:justify-start">
-                <LockKeyhole className="w-5 h-5 text-[#D4AF37]" strokeWidth={1.5} />
-                <span className="text-[#D4AF37] text-xs font-semibold tracking-[0.2em] uppercase">
-                  Portail Client Sécurisé
-                </span>
-              </div>
-              <h3 className="font-display font-bold text-2xl sm:text-3xl text-white">
-                Accédez à vos documents à tout moment
-              </h3>
-              <p className="text-white/45 text-sm mt-2 max-w-md">
-                Espace dédié pour consulter vos dossiers, télécharger vos documents comptables et communiquer avec votre gestionnaire.
-              </p>
-            </FadeIn>
-            <FadeIn delay={0.15}>
-              <motion.a
-                href="/portail-client"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 px-8 py-4 border border-[#D4AF37]/50 text-[#D4AF37] text-sm font-semibold tracking-wide rounded-sm hover:bg-[#D4AF37]/10 transition-all duration-300 group whitespace-nowrap"
-              >
-                <LockKeyhole className="w-4 h-4" strokeWidth={1.5} />
-                Accéder au portail
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
-              </motion.a>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
+
 
       {/* ── CONTACT ──────────────────────────────────────────────────── */}
       <section
