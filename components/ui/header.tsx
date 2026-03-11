@@ -32,12 +32,12 @@ export function Header() {
   const headerBg = useTransform(
     scrollY,
     [0, 80],
-    ["rgba(26,43,60,0)", "rgba(10,20,32,0.96)"]
+    ["rgba(51,53,51,0)", "rgba(36,36,35,0.96)"]
   );
   const headerBorder = useTransform(
     scrollY,
     [0, 80],
-    ["rgba(212,175,55,0)", "rgba(212,175,55,0.18)"]
+    ["rgba(245,203,92,0)", "rgba(245,203,92,0.18)"]
   );
 
   function openDropdown() {
@@ -83,7 +83,7 @@ export function Header() {
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`}
                   strokeWidth={2}
                 />
-                <span className="absolute -bottom-1 left-0 w-full h-px bg-[#D4AF37] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                <span className="absolute -bottom-1 left-0 w-full h-px bg-[#F5CB5C] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </button>
 
               <AnimatePresence>
@@ -95,11 +95,11 @@ export function Header() {
                     transition={{ duration: 0.18, ease: "easeOut" }}
                     onMouseEnter={openDropdown}
                     onMouseLeave={closeDropdown}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-[#0a1420]/95 backdrop-blur-md border border-[#D4AF37]/20 shadow-2xl shadow-black/40"
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-[#2a2a28]/95 backdrop-blur-md border border-[#F5CB5C]/20 shadow-2xl shadow-black/40"
                     style={{ borderRadius: "2px" }}
                   >
                     {/* Top gold rule */}
-                    <div className="h-px w-full bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent" />
+                    <div className="h-px w-full bg-gradient-to-r from-transparent via-[#F5CB5C]/50 to-transparent" />
 
                     <div className="py-2">
                       {serviceDropdownItems.map((item, i) => {
@@ -111,10 +111,10 @@ export function Header() {
                             onClick={() => setDropdownOpen(false)}
                             className="flex items-center gap-3 px-4 py-2.5 text-white/65 hover:text-white hover:bg-white/5 transition-colors duration-150 group/item"
                           >
-                            <div className="w-7 h-7 shrink-0 flex items-center justify-center rounded-sm border border-[#D4AF37]/0 group-hover/item:border-[#D4AF37]/30 transition-colors duration-150"
-                              style={{ backgroundColor: "rgba(212,175,55,0)" }}
+                            <div className="w-7 h-7 shrink-0 flex items-center justify-center rounded-sm border border-[#F5CB5C]/0 group-hover/item:border-[#F5CB5C]/30 transition-colors duration-150"
+                              style={{ backgroundColor: "rgba(245,203,92,0)" }}
                             >
-                              <Icon className="w-3.5 h-3.5 text-[#D4AF37]/60 group-hover/item:text-[#D4AF37] transition-colors duration-150" strokeWidth={1.5} />
+                              <Icon className="w-3.5 h-3.5 text-[#F5CB5C]/60 group-hover/item:text-[#F5CB5C] transition-colors duration-150" strokeWidth={1.5} />
                             </div>
                             <span className="text-sm font-medium">{t(item.key)}</span>
                           </Link>
@@ -122,7 +122,7 @@ export function Header() {
                       })}
                     </div>
 
-                    <div className="h-px w-full bg-gradient-to-r from-transparent via-[#D4AF37]/20 to-transparent" />
+                    <div className="h-px w-full bg-gradient-to-r from-transparent via-[#F5CB5C]/20 to-transparent" />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -136,7 +136,7 @@ export function Header() {
                 className="text-sm font-medium tracking-wide text-white/70 hover:text-white transition-colors duration-300 relative group"
               >
                 {t(link.key)}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#D4AF37] transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#F5CB5C] transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
           </nav>
@@ -165,7 +165,7 @@ export function Header() {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-[#0d1e2e] border-b border-[#D4AF37]/20"
+          className="md:hidden bg-[#1c1c1b] border-b border-[#F5CB5C]/20"
         >
           <nav className="flex flex-col gap-1 px-4 py-4">
             {/* Services accordion */}
@@ -181,7 +181,7 @@ export function Header() {
             </button>
 
             {mobileServicesOpen && (
-              <div className="pl-4 border-l border-[#D4AF37]/20 ml-4 mb-1">
+              <div className="pl-4 border-l border-[#F5CB5C]/20 ml-4 mb-1">
                 {serviceDropdownItems.map((item) => {
                   const Icon = item.icon;
                   return (
@@ -191,7 +191,7 @@ export function Header() {
                       onClick={() => setMobileMenuOpen(false)}
                       className="flex items-center gap-3 text-sm text-white/60 hover:text-white px-4 py-2.5 hover:bg-white/5 rounded-sm transition-colors duration-150"
                     >
-                      <Icon className="w-4 h-4 text-[#D4AF37]/70 shrink-0" strokeWidth={1.5} />
+                      <Icon className="w-4 h-4 text-[#F5CB5C]/70 shrink-0" strokeWidth={1.5} />
                       {t(item.key)}
                     </Link>
                   );

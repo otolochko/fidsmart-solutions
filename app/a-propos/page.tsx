@@ -52,11 +52,11 @@ export default function AboutPage() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(10,20,35,0.82) 0%, rgba(10,20,35,0.70) 60%, rgba(10,20,35,0.90) 100%)",
+              "linear-gradient(to bottom, rgba(36,36,35,0.82) 0%, rgba(36,36,35,0.70) 60%, rgba(36,36,35,0.90) 100%)",
           }}
         />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/25 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#F5CB5C]/40 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#F5CB5C]/25 to-transparent" />
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
@@ -65,16 +65,16 @@ export default function AboutPage() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div
-              className="inline-flex items-center justify-center w-14 h-14 rounded-sm border border-[#D4AF37]/40 mb-6"
-              style={{ backgroundColor: "rgba(212,175,55,0.1)" }}
+              className="inline-flex items-center justify-center w-14 h-14 rounded-sm border border-[#F5CB5C]/40 mb-6"
+              style={{ backgroundColor: "rgba(245,203,92,0.1)" }}
             >
-              <Shield className="w-6 h-6 text-[#D4AF37]" strokeWidth={1.5} />
+              <Shield className="w-6 h-6 text-[#F5CB5C]" strokeWidth={1.5} />
             </div>
 
             <h1 className="font-display font-bold text-5xl sm:text-6xl lg:text-7xl text-white leading-tight mb-5">
               {t("about.hero.title")}
               <br />
-              <span style={{ color: "#D4AF37" }}>Fidsmart Solutions</span>
+              <span style={{ color: "#F5CB5C" }}>Fidsmart Solutions</span>
             </h1>
           </motion.div>
         </div>
@@ -107,16 +107,16 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: item.delay }}
-                  className="flex items-start gap-4 p-5 bg-card border border-border rounded-sm hover:border-[#D4AF37]/30 transition-colors duration-300"
+                  className="flex items-start gap-4 p-5 bg-card border border-border rounded-sm hover:border-[#F5CB5C]/30 transition-colors duration-300"
                 >
                   <div
                     className="w-6 h-6 shrink-0 rounded-sm flex items-center justify-center mt-0.5"
                     style={{
-                      backgroundColor: "rgba(212,175,55,0.12)",
-                      border: "1px solid rgba(212,175,55,0.35)",
+                      backgroundColor: "rgba(245,203,92,0.12)",
+                      border: "1px solid rgba(245,203,92,0.35)",
                     }}
                   >
-                    <Icon className="w-3.5 h-3.5 text-[#D4AF37]" strokeWidth={2} />
+                    <Icon className="w-3.5 h-3.5 text-[#F5CB5C]" strokeWidth={2} />
                   </div>
                   <div>
                     <span className="text-foreground font-medium text-sm">
@@ -134,15 +134,15 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-16 lg:py-24 bg-[#1A2B3C]">
+      <section className="py-16 lg:py-24 bg-[#242423]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
             <div className="flex items-center justify-center gap-3 mb-5">
-              <span className="block w-8 h-px bg-[#D4AF37]/50" />
-              <span className="text-[#D4AF37] text-[10px] font-semibold tracking-[0.25em] uppercase">
+              <span className="block w-8 h-px bg-[#F5CB5C]/50" />
+              <span className="text-[#F5CB5C] text-[10px] font-semibold tracking-[0.25em] uppercase">
                 Prendre contact
               </span>
-              <span className="block w-8 h-px bg-[#D4AF37]/50" />
+              <span className="block w-8 h-px bg-[#F5CB5C]/50" />
             </div>
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-white mb-4">
               Prêt à propulser votre entreprise?
@@ -154,7 +154,7 @@ export default function AboutPage() {
               <Link
                 href="/#contact"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold tracking-wide rounded-sm transition-all duration-300 group"
-                style={{ backgroundColor: "#D4AF37", color: "#0f1a24" }}
+                style={{ backgroundColor: "#F5CB5C", color: "#242423" }}
               >
                 {t("nav.contact")}
                 <ArrowRight

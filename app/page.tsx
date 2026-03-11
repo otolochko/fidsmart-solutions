@@ -77,11 +77,11 @@ function FadeIn({
 function SectionLabel({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-3 justify-center mb-5">
-      <span className="block w-8 h-px bg-[#D4AF37]" />
-      <span className="text-[#D4AF37] text-[10px] font-semibold tracking-[0.25em] uppercase">
+      <span className="block w-8 h-px bg-[#F5CB5C]" />
+      <span className="text-[#F5CB5C] text-[10px] font-semibold tracking-[0.25em] uppercase">
         {text}
       </span>
-      <span className="block w-8 h-px bg-[#D4AF37]" />
+      <span className="block w-8 h-px bg-[#F5CB5C]" />
     </div>
   );
 }
@@ -101,7 +101,7 @@ export default function Home() {
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
 
   return (
-    <div className="relative bg-[#fdfbf7] dark:bg-[#0f1520]">
+    <div className="relative bg-[#E8EDDF] dark:bg-[#333533]">
 
       {/* ── HERO ──────────────────────────────────────────────────────── */}
       <section
@@ -125,7 +125,7 @@ export default function Home() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(10,20,35,0.88) 0%, rgba(0,0,0,0.55) 50%, rgba(10,20,35,0.88) 100%)",
+              "linear-gradient(to bottom, rgba(36,36,35,0.88) 0%, rgba(36,36,35,0.55) 50%, rgba(36,36,35,0.88) 100%)",
           }}
         />
 
@@ -139,7 +139,7 @@ export default function Home() {
         />
 
         {/* Gold thin top rule */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#F5CB5C]/40 to-transparent" />
 
         {/* Content */}
         <motion.div
@@ -153,11 +153,11 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex items-center justify-center gap-3 mb-10"
           >
-            <span className="block w-8 h-px bg-[#D4AF37]/60" />
-            <span className="text-[#D4AF37]/80 text-[10px] font-semibold tracking-[0.3em] uppercase">
+            <span className="block w-8 h-px bg-[#F5CB5C]/60" />
+            <span className="text-[#F5CB5C]/80 text-[10px] font-semibold tracking-[0.3em] uppercase">
               {t("hero.badge")}
             </span>
-            <span className="block w-8 h-px bg-[#D4AF37]/60" />
+            <span className="block w-8 h-px bg-[#F5CB5C]/60" />
           </motion.div>
 
           {/* H1 */}
@@ -172,7 +172,7 @@ export default function Home() {
             </span>
             <span
               className="block text-[clamp(3.5rem,10vw,8rem)]"
-              style={{ color: "#D4AF37" }}
+              style={{ color: "#F5CB5C" }}
             >
               {t("hero.headline2")}
             </span>
@@ -208,10 +208,10 @@ export default function Home() {
             {/* Solid gold */}
             <motion.a
               href="#contact"
-              whileHover={{ scale: 1.02, backgroundColor: "#c9a227" }}
+              whileHover={{ scale: 1.02, backgroundColor: "#e8b84b" }}
               whileTap={{ scale: 0.98 }}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold tracking-wide rounded-sm transition-all duration-300 group"
-              style={{ backgroundColor: "#D4AF37", color: "#0f1a24" }}
+              style={{ backgroundColor: "#F5CB5C", color: "#242423" }}
             >
               {t("hero.cta.contact")}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
@@ -235,11 +235,11 @@ export default function Home() {
         </motion.div>
 
         {/* Bottom gold rule */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#F5CB5C]/30 to-transparent" />
       </section>
 
       {/* ── STATS STRIP ──────────────────────────────────────────────── */}
-      <section className="bg-[#1A2B3C] border-b border-[#D4AF37]/15">
+      <section className="bg-[#242423] border-b border-[#F5CB5C]/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4">
             {[
@@ -255,12 +255,12 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 className={`py-8 px-6 text-center ${
-                  i < 3 ? "border-r border-[#D4AF37]/10" : ""
+                  i < 3 ? "border-r border-[#F5CB5C]/10" : ""
                 }`}
               >
                 <div
                   className="font-display font-bold text-3xl sm:text-4xl mb-1"
-                  style={{ color: "#D4AF37" }}
+                  style={{ color: "#F5CB5C" }}
                 >
                   {stat.value}
                 </div>
@@ -276,36 +276,36 @@ export default function Home() {
       {/* ── SERVICES ─────────────────────────────────────────────────── */}
       <section
         id="services"
-        className="py-24 lg:py-36 bg-[#fdfbf7] dark:bg-[#0f1520]"
+        className="py-24 lg:py-36 bg-[#E8EDDF] dark:bg-[#333533]"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <SectionLabel text={t("services.section.label")} />
-            <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-[#1A2B3C] dark:text-white mb-5 leading-tight">
+            <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-[#242423] dark:text-white mb-5 leading-tight">
               {t("services.title")}
             </h2>
-            <p className="text-[#1A2B3C]/60 dark:text-white/50 max-w-xl mx-auto text-base leading-relaxed">
+            <p className="text-[#242423]/60 dark:text-white/50 max-w-xl mx-auto text-base leading-relaxed">
               {t("services.section.subtitle")}
             </p>
           </FadeIn>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#e5e7eb] dark:bg-[#D4AF37]/10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#CFDBD5] dark:bg-[#F5CB5C]/10">
             {mainServices.map((service) => {
               const Icon = service.icon;
               const cardContent = (
                 <>
-                  <div className="absolute top-0 left-0 w-full h-0.5 bg-[#D4AF37] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                  <div className="w-12 h-12 rounded-sm border border-[#D4AF37]/30 group-hover:border-[#D4AF37]/70 flex items-center justify-center mb-6 transition-colors duration-300">
-                    <Icon className="w-5 h-5 text-[#D4AF37]" strokeWidth={1.5} />
+                  <div className="absolute top-0 left-0 w-full h-0.5 bg-[#F5CB5C] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                  <div className="w-12 h-12 rounded-sm border border-[#F5CB5C]/30 group-hover:border-[#F5CB5C]/70 flex items-center justify-center mb-6 transition-colors duration-300">
+                    <Icon className="w-5 h-5 text-[#F5CB5C]" strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-display font-bold text-xl text-[#1A2B3C] dark:text-white mb-3">
+                  <h3 className="font-display font-bold text-xl text-[#242423] dark:text-white mb-3">
                     {t(service.key)}
                   </h3>
-                  <p className="text-sm text-[#1A2B3C]/55 dark:text-white/45 leading-relaxed">
+                  <p className="text-sm text-[#242423]/55 dark:text-white/45 leading-relaxed">
                     {t(`${service.key}.desc`)}
                   </p>
                   {service.href && (
-                    <div className="mt-6 flex items-center gap-2 text-[#D4AF37] text-xs font-semibold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="mt-6 flex items-center gap-2 text-[#F5CB5C] text-xs font-semibold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <span>En savoir plus</span>
                       <ArrowRight className="w-3.5 h-3.5" strokeWidth={2} />
                     </div>
@@ -314,7 +314,7 @@ export default function Home() {
               );
 
               const className =
-                "group bg-white dark:bg-[#0f1520] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl hover:shadow-[#1A2B3C]/5 dark:hover:shadow-black/20 relative overflow-hidden";
+                "group bg-white dark:bg-[#333533] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl hover:shadow-[#242423]/5 dark:hover:shadow-black/20 relative overflow-hidden";
 
               return service.href ? (
                 <motion.div
@@ -348,13 +348,13 @@ export default function Home() {
           {/* Complementary services header */}
           <FadeIn className="mt-16 mb-8 text-center">
             <SectionLabel text={t("complementary.title")} />
-            <p className="text-[#1A2B3C]/55 dark:text-white/45 text-sm max-w-lg mx-auto">
+            <p className="text-[#242423]/55 dark:text-white/45 text-sm max-w-lg mx-auto">
               {t("complementary.subtitle")}
             </p>
           </FadeIn>
 
           {/* Complementary services */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-[#e5e7eb] dark:bg-[#D4AF37]/10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-[#CFDBD5] dark:bg-[#F5CB5C]/10">
             {complementaryServices.map((service) => {
               const Icon = service.icon;
               return (
@@ -368,20 +368,20 @@ export default function Home() {
                 >
                   <Link
                     href="/offres-etendues"
-                    className="group bg-white dark:bg-[#0f1520] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl relative overflow-hidden flex items-start gap-6 block"
+                    className="group bg-white dark:bg-[#333533] p-8 lg:p-10 transition-all duration-300 hover:shadow-xl relative overflow-hidden flex items-start gap-6 block"
                   >
-                    <div className="absolute top-0 left-0 w-full h-0.5 bg-[#D4AF37] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                    <div className="w-12 h-12 shrink-0 rounded-sm border border-[#D4AF37]/30 group-hover:border-[#D4AF37]/70 flex items-center justify-center transition-colors duration-300">
-                      <Icon className="w-5 h-5 text-[#D4AF37]" strokeWidth={1.5} />
+                    <div className="absolute top-0 left-0 w-full h-0.5 bg-[#F5CB5C] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                    <div className="w-12 h-12 shrink-0 rounded-sm border border-[#F5CB5C]/30 group-hover:border-[#F5CB5C]/70 flex items-center justify-center transition-colors duration-300">
+                      <Icon className="w-5 h-5 text-[#F5CB5C]" strokeWidth={1.5} />
                     </div>
                     <div>
-                      <h3 className="font-display font-bold text-xl text-[#1A2B3C] dark:text-white mb-2">
+                      <h3 className="font-display font-bold text-xl text-[#242423] dark:text-white mb-2">
                         {t(service.key)}
                       </h3>
-                      <p className="text-sm text-[#1A2B3C]/55 dark:text-white/45 leading-relaxed">
+                      <p className="text-sm text-[#242423]/55 dark:text-white/45 leading-relaxed">
                         {t(`${service.key}.desc`)}
                       </p>
-                      <div className="mt-4 flex items-center gap-2 text-[#D4AF37] text-xs font-semibold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="mt-4 flex items-center gap-2 text-[#F5CB5C] text-xs font-semibold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <span>En savoir plus</span>
                         <ArrowRight className="w-3.5 h-3.5" strokeWidth={2} />
                       </div>
@@ -395,7 +395,7 @@ export default function Home() {
       </section>
 
       {/* ── SWISS ADVANTAGE ──────────────────────────────────────────── */}
-      <section className="bg-[#1A2B3C] overflow-hidden">
+      <section className="bg-[#242423] overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
             {/* Left — image */}
@@ -406,16 +406,16 @@ export default function Home() {
                 fill
                 className="object-cover"
               />
-              {/* Dark navy overlay */}
-              <div className="absolute inset-0 bg-[#1A2B3C]/40" />
+              {/* Dark overlay */}
+              <div className="absolute inset-0 bg-[#242423]/40" />
 
               {/* Decorative corner accents */}
-              <div className="absolute top-8 left-8 w-16 h-16 border-t border-l border-[#D4AF37]/50" />
-              <div className="absolute bottom-8 right-8 w-16 h-16 border-b border-r border-[#D4AF37]/50" />
+              <div className="absolute top-8 left-8 w-16 h-16 border-t border-l border-[#F5CB5C]/50" />
+              <div className="absolute bottom-8 right-8 w-16 h-16 border-b border-r border-[#F5CB5C]/50" />
 
               {/* Floating badge */}
-              <div className="absolute bottom-10 left-10 bg-[#1A2B3C]/90 backdrop-blur-sm border border-[#D4AF37]/30 px-5 py-4">
-                <div className="text-[#D4AF37] font-display font-bold text-2xl">
+              <div className="absolute bottom-10 left-10 bg-[#242423]/90 backdrop-blur-sm border border-[#F5CB5C]/30 px-5 py-4">
+                <div className="text-[#F5CB5C] font-display font-bold text-2xl">
                   2022
                 </div>
                 <div className="text-white/60 text-xs tracking-widest uppercase mt-0.5">
@@ -428,8 +428,8 @@ export default function Home() {
             <div className="px-8 py-16 lg:px-16 lg:py-20 flex flex-col justify-center">
               <FadeIn>
                 <div className="flex items-center gap-3 mb-6">
-                  <span className="block w-8 h-px bg-[#D4AF37]/60" />
-                  <span className="text-[#D4AF37] text-[10px] font-semibold tracking-[0.25em] uppercase">
+                  <span className="block w-8 h-px bg-[#F5CB5C]/60" />
+                  <span className="text-[#F5CB5C] text-[10px] font-semibold tracking-[0.25em] uppercase">
                     {t("expertise.section.label")}
                   </span>
                 </div>
@@ -452,9 +452,9 @@ export default function Home() {
                     >
                       <div
                         className="w-5 h-5 shrink-0 rounded-sm flex items-center justify-center mt-0.5"
-                        style={{ backgroundColor: "rgba(212,175,55,0.15)", border: "1px solid rgba(212,175,55,0.4)" }}
+                        style={{ backgroundColor: "rgba(245,203,92,0.15)", border: "1px solid rgba(245,203,92,0.4)" }}
                       >
-                        <Check className="w-3 h-3 text-[#D4AF37]" strokeWidth={2.5} />
+                        <Check className="w-3 h-3 text-[#F5CB5C]" strokeWidth={2.5} />
                       </div>
                       <span className="text-white/75 text-sm leading-snug">
                         {t(key)}
@@ -468,7 +468,7 @@ export default function Home() {
                     href="/a-propos"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="inline-flex items-center gap-2 text-[#D4AF37] text-sm font-semibold tracking-wide group"
+                    className="inline-flex items-center gap-2 text-[#F5CB5C] text-sm font-semibold tracking-wide group"
                   >
                     {t("expertise.learn.more")}
                     <ArrowRight
@@ -488,24 +488,24 @@ export default function Home() {
       {/* ── CONTACT ──────────────────────────────────────────────────── */}
       <section
         id="contact"
-        className="py-24 lg:py-36 bg-[#fdfbf7] dark:bg-[#0f1520]"
+        className="py-24 lg:py-36 bg-[#E8EDDF] dark:bg-[#333533]"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <SectionLabel text={t("contact.section.label")} />
-            <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-[#1A2B3C] dark:text-white mb-5 leading-tight">
+            <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-[#242423] dark:text-white mb-5 leading-tight">
               {t("contact.title")}
             </h2>
-            <p className="text-[#1A2B3C]/55 dark:text-white/45 max-w-lg mx-auto text-base leading-relaxed">
+            <p className="text-[#242423]/55 dark:text-white/45 max-w-lg mx-auto text-base leading-relaxed">
               {t("contact.subtitle")}
             </p>
           </FadeIn>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-[#e5e7eb] dark:bg-[#D4AF37]/10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-[#CFDBD5] dark:bg-[#F5CB5C]/10">
             {/* Map placeholder */}
-            <FadeIn className="bg-white dark:bg-[#0f1520] p-8 lg:p-10 flex flex-col gap-6">
+            <FadeIn className="bg-white dark:bg-[#333533] p-8 lg:p-10 flex flex-col gap-6">
               {/* Styled map mockup */}
-              <div className="relative w-full aspect-[4/3] rounded-sm overflow-hidden bg-[#1A2B3C]">
+              <div className="relative w-full aspect-[4/3] rounded-sm overflow-hidden bg-[#242423]">
                 {/* Map grid lines */}
                 <svg
                   className="absolute inset-0 w-full h-full opacity-20"
@@ -521,23 +521,23 @@ export default function Home() {
                       <path
                         d="M 40 0 L 0 0 0 40"
                         fill="none"
-                        stroke="#D4AF37"
+                        stroke="#F5CB5C"
                         strokeWidth="0.5"
                       />
                     </pattern>
                   </defs>
                   <rect width="100%" height="100%" fill="url(#mapgrid)" />
                   {/* Simulated road lines */}
-                  <line x1="20%" y1="0" x2="40%" y2="100%" stroke="#D4AF37" strokeWidth="1" opacity="0.6" />
-                  <line x1="55%" y1="0" x2="70%" y2="100%" stroke="#D4AF37" strokeWidth="1" opacity="0.6" />
-                  <line x1="0" y1="35%" x2="100%" y2="45%" stroke="#D4AF37" strokeWidth="1.5" opacity="0.5" />
-                  <line x1="0" y1="65%" x2="100%" y2="70%" stroke="#D4AF37" strokeWidth="1" opacity="0.4" />
-                  <line x1="0" y1="15%" x2="100%" y2="25%" stroke="#D4AF37" strokeWidth="0.8" opacity="0.3" />
+                  <line x1="20%" y1="0" x2="40%" y2="100%" stroke="#F5CB5C" strokeWidth="1" opacity="0.6" />
+                  <line x1="55%" y1="0" x2="70%" y2="100%" stroke="#F5CB5C" strokeWidth="1" opacity="0.6" />
+                  <line x1="0" y1="35%" x2="100%" y2="45%" stroke="#F5CB5C" strokeWidth="1.5" opacity="0.5" />
+                  <line x1="0" y1="65%" x2="100%" y2="70%" stroke="#F5CB5C" strokeWidth="1" opacity="0.4" />
+                  <line x1="0" y1="15%" x2="100%" y2="25%" stroke="#F5CB5C" strokeWidth="0.8" opacity="0.3" />
                 </svg>
 
                 {/* Location label */}
-                <div className="absolute top-3 left-3 bg-[#1A2B3C]/80 backdrop-blur-sm border border-[#D4AF37]/30 px-3 py-1.5">
-                  <span className="text-[#D4AF37] text-[10px] tracking-widest font-semibold uppercase">
+                <div className="absolute top-3 left-3 bg-[#242423]/80 backdrop-blur-sm border border-[#F5CB5C]/30 px-3 py-1.5">
+                  <span className="text-[#F5CB5C] text-[10px] tracking-widest font-semibold uppercase">
                     Genève, Suisse
                   </span>
                 </div>
@@ -548,45 +548,45 @@ export default function Home() {
                     animate={{ scale: [1, 1.6, 1], opacity: [0.5, 0, 0.5] }}
                     transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
                     className="absolute w-10 h-10 rounded-full"
-                    style={{ backgroundColor: "rgba(212,175,55,0.2)" }}
+                    style={{ backgroundColor: "rgba(245,203,92,0.2)" }}
                   />
                   <div
-                    className="w-5 h-5 rounded-full border-2 border-[#D4AF37] flex items-center justify-center relative z-10"
-                    style={{ backgroundColor: "rgba(212,175,55,0.3)" }}
+                    className="w-5 h-5 rounded-full border-2 border-[#F5CB5C] flex items-center justify-center relative z-10"
+                    style={{ backgroundColor: "rgba(245,203,92,0.3)" }}
                   >
-                    <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+                    <div className="w-2 h-2 rounded-full bg-[#F5CB5C]" />
                   </div>
-                  <div className="w-px h-4 bg-[#D4AF37]" />
+                  <div className="w-px h-4 bg-[#F5CB5C]" />
                 </div>
               </div>
 
               {/* Contact details */}
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
-                  <div className="w-9 h-9 shrink-0 rounded-sm border border-[#D4AF37]/30 flex items-center justify-center">
-                    <MapPin className="w-4 h-4 text-[#D4AF37]" strokeWidth={1.5} />
+                  <div className="w-9 h-9 shrink-0 rounded-sm border border-[#F5CB5C]/30 flex items-center justify-center">
+                    <MapPin className="w-4 h-4 text-[#F5CB5C]" strokeWidth={1.5} />
                   </div>
                   <div>
-                    <div className="text-[10px] text-[#1A2B3C]/40 dark:text-white/35 uppercase tracking-wider mb-0.5">
+                    <div className="text-[10px] text-[#242423]/40 dark:text-white/35 uppercase tracking-wider mb-0.5">
                       Adresse
                     </div>
-                    <div className="text-sm text-[#1A2B3C] dark:text-white/80 font-medium">
+                    <div className="text-sm text-[#242423] dark:text-white/80 font-medium">
                       {t("contact.address")}
                     </div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-9 h-9 shrink-0 rounded-sm border border-[#D4AF37]/30 flex items-center justify-center">
-                    <Phone className="w-4 h-4 text-[#D4AF37]" strokeWidth={1.5} />
+                  <div className="w-9 h-9 shrink-0 rounded-sm border border-[#F5CB5C]/30 flex items-center justify-center">
+                    <Phone className="w-4 h-4 text-[#F5CB5C]" strokeWidth={1.5} />
                   </div>
                   <div>
-                    <div className="text-[10px] text-[#1A2B3C]/40 dark:text-white/35 uppercase tracking-wider mb-0.5">
+                    <div className="text-[10px] text-[#242423]/40 dark:text-white/35 uppercase tracking-wider mb-0.5">
                       Téléphone
                     </div>
                     <a
                       href={`tel:${t("contact.phone")}`}
-                      className="text-sm text-[#1A2B3C] dark:text-white/80 font-medium hover:text-[#D4AF37] transition-colors"
+                      className="text-sm text-[#242423] dark:text-white/80 font-medium hover:text-[#F5CB5C] transition-colors"
                     >
                       {t("contact.phone")}
                     </a>
@@ -594,30 +594,30 @@ export default function Home() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-9 h-9 shrink-0 rounded-sm border border-[#D4AF37]/30 flex items-center justify-center">
-                    <Clock className="w-4 h-4 text-[#D4AF37]" strokeWidth={1.5} />
+                  <div className="w-9 h-9 shrink-0 rounded-sm border border-[#F5CB5C]/30 flex items-center justify-center">
+                    <Clock className="w-4 h-4 text-[#F5CB5C]" strokeWidth={1.5} />
                   </div>
                   <div>
-                    <div className="text-[10px] text-[#1A2B3C]/40 dark:text-white/35 uppercase tracking-wider mb-0.5">
+                    <div className="text-[10px] text-[#242423]/40 dark:text-white/35 uppercase tracking-wider mb-0.5">
                       Horaires
                     </div>
-                    <div className="text-sm text-[#1A2B3C] dark:text-white/80 font-medium">
+                    <div className="text-sm text-[#242423] dark:text-white/80 font-medium">
                       {t("contact.hours")}
                     </div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-9 h-9 shrink-0 rounded-sm border border-[#D4AF37]/30 flex items-center justify-center">
-                    <Mail className="w-4 h-4 text-[#D4AF37]" strokeWidth={1.5} />
+                  <div className="w-9 h-9 shrink-0 rounded-sm border border-[#F5CB5C]/30 flex items-center justify-center">
+                    <Mail className="w-4 h-4 text-[#F5CB5C]" strokeWidth={1.5} />
                   </div>
                   <div>
-                    <div className="text-[10px] text-[#1A2B3C]/40 dark:text-white/35 uppercase tracking-wider mb-0.5">
+                    <div className="text-[10px] text-[#242423]/40 dark:text-white/35 uppercase tracking-wider mb-0.5">
                       Email
                     </div>
                     <a
                       href={`mailto:${t("contact.email")}`}
-                      className="text-sm text-[#1A2B3C] dark:text-white/80 font-medium hover:text-[#D4AF37] transition-colors"
+                      className="text-sm text-[#242423] dark:text-white/80 font-medium hover:text-[#F5CB5C] transition-colors"
                     >
                       {t("contact.email")}
                     </a>
@@ -627,14 +627,14 @@ export default function Home() {
             </FadeIn>
 
             {/* Contact form */}
-            <FadeIn delay={0.1} className="bg-white dark:bg-[#0f1520] p-8 lg:p-10">
+            <FadeIn delay={0.1} className="bg-white dark:bg-[#333533] p-8 lg:p-10">
               <form
                 onSubmit={(e) => e.preventDefault()}
                 className="space-y-6 h-full flex flex-col justify-between"
               >
                 <div className="space-y-5">
                   <div>
-                    <label className="block text-[10px] font-semibold tracking-[0.2em] uppercase text-[#1A2B3C]/50 dark:text-white/40 mb-2">
+                    <label className="block text-[10px] font-semibold tracking-[0.2em] uppercase text-[#242423]/50 dark:text-white/40 mb-2">
                       {t("contact.form.name")}
                     </label>
                     <input
@@ -644,12 +644,12 @@ export default function Home() {
                         setFormState((s) => ({ ...s, name: e.target.value }))
                       }
                       placeholder={t("contact.form.placeholder.name")}
-                      className="w-full px-4 py-3 bg-transparent border border-[#e5e7eb] dark:border-[#D4AF37]/15 text-[#1A2B3C] dark:text-white text-sm placeholder:text-[#1A2B3C]/30 dark:placeholder:text-white/25 outline-none focus:border-[#D4AF37]/60 transition-colors duration-300 rounded-sm"
+                      className="w-full px-4 py-3 bg-transparent border border-[#CFDBD5] dark:border-[#F5CB5C]/15 text-[#242423] dark:text-white text-sm placeholder:text-[#242423]/30 dark:placeholder:text-white/25 outline-none focus:border-[#F5CB5C]/60 transition-colors duration-300 rounded-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[10px] font-semibold tracking-[0.2em] uppercase text-[#1A2B3C]/50 dark:text-white/40 mb-2">
+                    <label className="block text-[10px] font-semibold tracking-[0.2em] uppercase text-[#242423]/50 dark:text-white/40 mb-2">
                       {t("contact.form.email")}
                     </label>
                     <input
@@ -659,12 +659,12 @@ export default function Home() {
                         setFormState((s) => ({ ...s, email: e.target.value }))
                       }
                       placeholder={t("contact.form.placeholder.email")}
-                      className="w-full px-4 py-3 bg-transparent border border-[#e5e7eb] dark:border-[#D4AF37]/15 text-[#1A2B3C] dark:text-white text-sm placeholder:text-[#1A2B3C]/30 dark:placeholder:text-white/25 outline-none focus:border-[#D4AF37]/60 transition-colors duration-300 rounded-sm"
+                      className="w-full px-4 py-3 bg-transparent border border-[#CFDBD5] dark:border-[#F5CB5C]/15 text-[#242423] dark:text-white text-sm placeholder:text-[#242423]/30 dark:placeholder:text-white/25 outline-none focus:border-[#F5CB5C]/60 transition-colors duration-300 rounded-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[10px] font-semibold tracking-[0.2em] uppercase text-[#1A2B3C]/50 dark:text-white/40 mb-2">
+                    <label className="block text-[10px] font-semibold tracking-[0.2em] uppercase text-[#242423]/50 dark:text-white/40 mb-2">
                       {t("contact.form.message")}
                     </label>
                     <textarea
@@ -674,7 +674,7 @@ export default function Home() {
                         setFormState((s) => ({ ...s, message: e.target.value }))
                       }
                       placeholder={t("contact.form.placeholder.message")}
-                      className="w-full px-4 py-3 bg-transparent border border-[#e5e7eb] dark:border-[#D4AF37]/15 text-[#1A2B3C] dark:text-white text-sm placeholder:text-[#1A2B3C]/30 dark:placeholder:text-white/25 outline-none focus:border-[#D4AF37]/60 transition-colors duration-300 rounded-sm resize-none"
+                      className="w-full px-4 py-3 bg-transparent border border-[#CFDBD5] dark:border-[#F5CB5C]/15 text-[#242423] dark:text-white text-sm placeholder:text-[#242423]/30 dark:placeholder:text-white/25 outline-none focus:border-[#F5CB5C]/60 transition-colors duration-300 rounded-sm resize-none"
                     />
                   </div>
                 </div>
@@ -684,7 +684,7 @@ export default function Home() {
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full py-4 text-sm font-semibold tracking-wider uppercase transition-colors duration-300 rounded-sm flex items-center justify-center gap-2 group"
-                  style={{ backgroundColor: "#D4AF37", color: "#0f1a24" }}
+                  style={{ backgroundColor: "#F5CB5C", color: "#242423" }}
                 >
                   {t("contact.form.submit")}
                   <ArrowRight
