@@ -20,6 +20,7 @@ import {
   Phone,
   Clock,
   ChevronDown,
+  CalendarDays,
 } from "lucide-react";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -504,60 +505,16 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-[#CFDBD5] dark:bg-[#F5CB5C]/10">
             {/* Map placeholder */}
             <FadeIn className="bg-white dark:bg-[#333533] p-8 lg:p-10 flex flex-col gap-6">
-              {/* Styled map mockup */}
-              <div className="relative w-full aspect-[4/3] rounded-sm overflow-hidden bg-[#242423]">
-                {/* Map grid lines */}
-                <svg
-                  className="absolute inset-0 w-full h-full opacity-20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <defs>
-                    <pattern
-                      id="mapgrid"
-                      width="40"
-                      height="40"
-                      patternUnits="userSpaceOnUse"
-                    >
-                      <path
-                        d="M 40 0 L 0 0 0 40"
-                        fill="none"
-                        stroke="#F5CB5C"
-                        strokeWidth="0.5"
-                      />
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill="url(#mapgrid)" />
-                  {/* Simulated road lines */}
-                  <line x1="20%" y1="0" x2="40%" y2="100%" stroke="#F5CB5C" strokeWidth="1" opacity="0.6" />
-                  <line x1="55%" y1="0" x2="70%" y2="100%" stroke="#F5CB5C" strokeWidth="1" opacity="0.6" />
-                  <line x1="0" y1="35%" x2="100%" y2="45%" stroke="#F5CB5C" strokeWidth="1.5" opacity="0.5" />
-                  <line x1="0" y1="65%" x2="100%" y2="70%" stroke="#F5CB5C" strokeWidth="1" opacity="0.4" />
-                  <line x1="0" y1="15%" x2="100%" y2="25%" stroke="#F5CB5C" strokeWidth="0.8" opacity="0.3" />
-                </svg>
-
-                {/* Location label */}
-                <div className="absolute top-3 left-3 bg-[#242423]/80 backdrop-blur-sm border border-[#F5CB5C]/30 px-3 py-1.5">
-                  <span className="text-[#F5CB5C] text-[10px] tracking-widest font-semibold uppercase">
-                    Genève, Suisse
-                  </span>
-                </div>
-
-                {/* Pulsing pin */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                  <motion.div
-                    animate={{ scale: [1, 1.6, 1], opacity: [0.5, 0, 0.5] }}
-                    transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute w-10 h-10 rounded-full"
-                    style={{ backgroundColor: "rgba(245,203,92,0.2)" }}
-                  />
-                  <div
-                    className="w-5 h-5 rounded-full border-2 border-[#F5CB5C] flex items-center justify-center relative z-10"
-                    style={{ backgroundColor: "rgba(245,203,92,0.3)" }}
-                  >
-                    <div className="w-2 h-2 rounded-full bg-[#F5CB5C]" />
-                  </div>
-                  <div className="w-px h-4 bg-[#F5CB5C]" />
-                </div>
+              {/* Google Maps embed */}
+              <div className="relative w-full aspect-[16/7] rounded-sm overflow-hidden">
+                <iframe
+                  src="https://maps.google.com/maps?q=Chemin+du+Pr%C3%A9-Fleuri+1-3,+1228+Plan-Les-Ouates,+Switzerland&output=embed&z=15"
+                  style={{ border: 0, width: "100%", height: "100%", display: "block" }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Fidsmart Solutions — Plan-Les-Ouates"
+                />
               </div>
 
               {/* Contact details */}
@@ -668,7 +625,7 @@ export default function Home() {
                       {t("contact.form.message")}
                     </label>
                     <textarea
-                      rows={6}
+                      rows={7}
                       value={formState.message}
                       onChange={(e) =>
                         setFormState((s) => ({ ...s, message: e.target.value }))
@@ -695,6 +652,36 @@ export default function Home() {
               </form>
             </FadeIn>
           </div>
+
+          {/* Booking CTA */}
+          <FadeIn delay={0.15} className="mt-px">
+            <div className="bg-white dark:bg-[#2a2a28] border border-[#F5CB5C]/20 px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div
+                  className="w-10 h-10 shrink-0 rounded-sm flex items-center justify-center"
+                  style={{ backgroundColor: "rgba(245,203,92,0.12)", border: "1px solid rgba(245,203,92,0.35)" }}
+                >
+                  <CalendarDays className="w-4 h-4 text-[#F5CB5C]" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-[#242423] dark:text-white">
+                    {t("contact.booking.title")}
+                  </p>
+                  <p className="text-xs text-[#242423]/50 dark:text-white/45 mt-0.5">
+                    {t("contact.booking.subtitle")}
+                  </p>
+                </div>
+              </div>
+              <Link
+                href="/rendez-vous"
+                className="shrink-0 inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold tracking-wide rounded-sm transition-all duration-300 group"
+                style={{ backgroundColor: "#F5CB5C", color: "#242423" }}
+              >
+                {t("contact.booking.cta")}
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
+              </Link>
+            </div>
+          </FadeIn>
         </div>
       </section>
     </div>

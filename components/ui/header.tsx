@@ -18,6 +18,7 @@ const serviceDropdownItems = [
 
 const otherNavLinks = [
   { key: "nav.about", href: "/a-propos" },
+  { key: "nav.rendez-vous", href: "/rendez-vous" },
   { key: "nav.contact", href: "/#contact" },
 ];
 

@@ -24,6 +24,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.service.administratif": "Administratif",
     "nav.service.frontaliers": "Frontaliers",
     "nav.service.offres": "Offres étendues",
+    "nav.rendez-vous": "Rendez-vous",
 
     // Hero
     "hero.title": "Fidsmart Solutions",
@@ -92,6 +93,9 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.section.label": "NOUS CONTACTER",
     "contact.title": "Parlons de votre projet",
     "contact.subtitle": "Prenez rendez-vous ou envoyez-nous un message. Notre équipe vous répond dans les 24 heures ouvrables.",
+    "contact.booking.title": "Préférez un rendez-vous en ligne ?",
+    "contact.booking.subtitle": "Choisissez un créneau directement dans notre agenda.",
+    "contact.booking.cta": "Réserver un créneau",
     "contact.address": "Chemin du Pré-Fleuri 1-3, 1228 Plan-Les-Ouates",
     "contact.phone": "+41 78 256 31 28",
     "contact.email": "info@fidsmart-solutions.ch",
@@ -132,6 +136,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.service.administratif": "Administrative",
     "nav.service.frontaliers": "Cross-border Workers",
     "nav.service.offres": "Extended Services",
+    "nav.rendez-vous": "Book Appointment",
 
     // Hero
     "hero.title": "Fidsmart Solutions",
@@ -199,6 +204,9 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.section.label": "CONTACT US",
     "contact.title": "Let's talk about your project",
     "contact.subtitle": "Schedule a meeting or send us a message. Our team responds within 24 business hours.",
+    "contact.booking.title": "Prefer an online appointment?",
+    "contact.booking.subtitle": "Pick a time slot directly in our calendar.",
+    "contact.booking.cta": "Book a slot",
     "contact.address": "Chemin du Pré-Fleuri 1-3, 1228 Plan-Les-Ouates",
     "contact.phone": "+41 78 256 31 28",
     "contact.email": "info@fidsmart-solutions.ch",
