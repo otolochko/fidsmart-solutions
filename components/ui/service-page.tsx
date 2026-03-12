@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, CalendarDays, Check } from "lucide-react";
+import { useLanguage } from "@/lib/language-context";
 
 export interface ServiceFeature {
   text: string;
@@ -55,6 +56,8 @@ export function ServicePage({
   secondarySection,
   note,
 }: ServicePageProps) {
+  const { t } = useLanguage();
+
   return (
     <div className="relative">
       {/* ── HERO ── */}
@@ -129,7 +132,7 @@ export function ServicePage({
               <div className="flex items-center gap-3 mb-8">
                 <span className="block w-8 h-px bg-[#F5CB5C]" />
                 <span className="text-[#F5CB5C] text-[10px] font-semibold tracking-[0.25em] uppercase">
-                  Nos prestations
+                  {t("servicepage.prestations")}
                 </span>
               </div>
             </FadeIn>
@@ -244,29 +247,40 @@ export function ServicePage({
             <div className="flex items-center justify-center gap-3 mb-5">
               <span className="block w-8 h-px bg-[#F5CB5C]/50" />
               <span className="text-[#F5CB5C] text-[10px] font-semibold tracking-[0.25em] uppercase">
-                Prendre contact
+                {t("servicepage.cta.label")}
               </span>
               <span className="block w-8 h-px bg-[#F5CB5C]/50" />
             </div>
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-white mb-4">
-              Discutons de votre projet
+              {t("servicepage.cta.title")}
             </h2>
             <p className="text-white/50 text-sm leading-relaxed mb-8 max-w-md mx-auto">
-              Notre équipe vous répond dans les 24 heures ouvrables.
+              {t("servicepage.cta.subtitle")}
             </p>
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold tracking-wide rounded-sm transition-all duration-300 group"
-                style={{ backgroundColor: "#F5CB5C", color: "#242423" }}
-              >
-                Nous contacter
-                <ArrowRight
-                  className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-                  strokeWidth={2}
-                />
-              </Link>
-            </motion.div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Link
+                  href="/#contact"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold tracking-wide rounded-sm transition-all duration-300 group"
+                  style={{ backgroundColor: "#F5CB5C", color: "#242423" }}
+                >
+                  {t("servicepage.cta.button")}
+                  <ArrowRight
+                    className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                    strokeWidth={2}
+                  />
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Link
+                  href="/rendez-vous"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold tracking-wide rounded-sm border border-white/20 text-white hover:border-[#F5CB5C]/60 hover:text-[#F5CB5C] transition-all duration-300"
+                >
+                  <CalendarDays className="w-4 h-4" strokeWidth={2} />
+                  {t("servicepage.cta.book")}
+                </Link>
+              </motion.div>
+            </div>
           </FadeIn>
         </div>
       </section>
