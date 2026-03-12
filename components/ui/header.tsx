@@ -28,10 +28,11 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
+  const isDark = !mounted || resolvedTheme === "dark";
 
   const { scrollY } = useScroll();
   const headerBgDark = useTransform(
@@ -57,6 +58,10 @@ export function Header() {
 
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     const unsub = scrollY.on("change", (v) => setIsScrolled(v > 60));
     return unsub;
   }, [scrollY]);
@@ -77,10 +82,18 @@ export function Header() {
 
   return (
     <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      style={{ backgroundColor: isDark ? headerBgDark : headerBgLight, borderBottomColor: isDark ? headerBorderDark : headerBorderLight }}
+      initial={false}
+      style={
+        mounted
+          ? {
+              backgroundColor: isDark ? headerBgDark : headerBgLight,
+              borderBottomColor: isDark ? headerBorderDark : headerBorderLight,
+            }
+          : {
+              backgroundColor: "rgba(51,53,51,0)",
+              borderBottomColor: "rgba(245,203,92,0)",
+            }
+      }
       className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
