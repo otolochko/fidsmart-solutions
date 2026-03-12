@@ -112,6 +112,14 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.rights": "Tous droits réservés",
     "footer.privacy": "Politique de confidentialité",
 
+    // ServicePage static labels
+    "servicepage.prestations": "Nos prestations",
+    "servicepage.cta.label": "Prendre contact",
+    "servicepage.cta.title": "Discutons de votre projet",
+    "servicepage.cta.subtitle": "Notre équipe vous répond dans les 24 heures ouvrables.",
+    "servicepage.cta.button": "Nous contacter",
+    "servicepage.cta.book": "Prendre rendez-vous",
+
     // About Page
     "about.hero.title": "À PROPOS DE",
     "about.hero.subtitle": "Créée en 2022, nous sommes un cabinet spécialisé dans la gestion fiduciaire des entreprises de Suisse.",
@@ -130,7 +138,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.services": "Services",
     "nav.contact": "Contact",
     "nav.clientportal": "Client Portal",
-    "nav.service.fiscalite": "Taxation",
+    "nav.service.fiscalite": "Tax Returns",
     "nav.service.comptabilite": "Accounting",
     "nav.service.creation": "Business Formation",
     "nav.service.administratif": "Administrative",
@@ -144,7 +152,7 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.badge": "Precision - Progress - Partnership",
     "hero.headline1": "Fidsmart",
     "hero.headline2": "Solutions",
-    "hero.subtitle2": "Fidsmart Solutions is here to help you when you need it most! Our fiduciary firm offers a range of services, from taxation to the administrative management of your business.",
+    "hero.subtitle2": "Fidsmart Solutions is here to help you when you need it most! Our fiduciary firm offers a range of services, from tax returns to the administrative management of your business.",
     "hero.cta.services": "Our Services",
     "hero.cta.contact": "Contact an Expert",
 
@@ -162,7 +170,7 @@ const translations: Record<Language, Record<string, string>> = {
     "services.title": "Our Services",
     "services.section.label": "OUR SERVICES",
     "services.section.subtitle": "Complete expertise to support every stage of your business in Switzerland.",
-    "services.fiscalite": "Taxation",
+    "services.fiscalite": "Tax Returns",
     "services.fiscalite.desc": "For individuals and legal entities.",
     "services.comptabilite": "Accounting",
     "services.comptabilite.desc": "Process of recording your company's financial transactions.",
@@ -222,6 +230,14 @@ const translations: Record<Language, Record<string, string>> = {
     // Footer
     "footer.rights": "All rights reserved",
     "footer.privacy": "Privacy Policy",
+
+    // ServicePage static labels
+    "servicepage.prestations": "Our Services",
+    "servicepage.cta.label": "Get in touch",
+    "servicepage.cta.title": "Let's discuss your project",
+    "servicepage.cta.subtitle": "Our team responds within 24 business hours.",
+    "servicepage.cta.button": "Contact us",
+    "servicepage.cta.book": "Book an appointment",
 
     // About Page
     "about.hero.title": "ABOUT",

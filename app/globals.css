@@ -1,19 +1,23 @@
 @import "tailwindcss";
 
+/* Override Tailwind v4's default media-query dark mode to use .dark class instead */
+@variant dark (&:where(.dark, .dark *));
+
 html {
   scroll-behavior: smooth;
 }
 
 :root {
-  --background: #242423;
-  --foreground: #E8EDDF;
-  --muted: #CFDBD5;
-  --accent: #F5CB5C;
-  --accent-foreground: #242423;
-  --card: #333533;
-  --card-foreground: #E8EDDF;
-  --border: #3a3c39;
-  --ring: #F5CB5C;
+  /* Light Theme */
+  --background: #FAFAF8;
+  --foreground: #242423;
+  --muted: #6B6E6A;
+  --accent: #D4A832;
+  --accent-foreground: #FAFAF8;
+  --card: #FFFFFF;
+  --card-foreground: #242423;
+  --border: #E2E2DE;
+  --ring: #D4A832;
 }
 
 .dark {
@@ -60,9 +64,11 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--background);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--muted);
   border-radius: 4px;
